@@ -2,15 +2,46 @@ import React from "react";
 import "./landingPage.css";
 
 function LandingPage() {
-  return (
+  /*
+  const landing = (
     <div className="landing">
       <div className="landing-text-block">
         <h1>SONGSPEDIA</h1>
         <h3>...you search, ...we find, ...its all about music!</h3>
-        <button className="btn">Continue</button>
+        <button className="btn" onClick={() => loadHome()}>
+          Continue
+        </button>
       </div>
     </div>
   );
+
+  function loadHome() {
+    return (
+      <header className="home">
+        <div className="home-text-block">
+          <h1>SONGSPEDIA</h1>
+          <h3>...you search, ...we find, ...its all about music!</h3>
+        </div>
+      </header>
+    );
+  }
+  */
+
+  const landing = (
+    <header className="home">
+      <div className="home-text-block">
+        <h1>YOUR MUSIC LIBRARY</h1>
+        <h3>...you search, ...we find, ...its all about music!</h3>
+      </div>
+    </header>
+  );
+  return landing;
+  // <header className="home">
+  //   <div className="home-text-block">
+  //     <h1>SONGSPEDIA</h1>
+  //     <h3>...you search, ...we find, ...its all about music!</h3>
+  //   </div>
+  // </header>
 }
 
 export default LandingPage;
