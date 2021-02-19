@@ -36,12 +36,6 @@ function LandingPage() {
     </header>
   );
   return landing;
-  // <header className="home">
-  //   <div className="home-text-block">
-  //     <h1>SONGSPEDIA</h1>
-  //     <h3>...you search, ...we find, ...its all about music!</h3>
-  //   </div>
-  // </header>
 }
 
 export default LandingPage;
