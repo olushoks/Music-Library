@@ -7,45 +7,38 @@ class GetAllSongs extends Component {
     this.state = { songsData: [] };
   }
 
-  componentDidCatch() {
-    axios
+  async componentDidMount() {
+    await axios
       .get("http://www.devcodecampmusiclibrary.com/api/music")
       .then((response) => {
         const songsData = response.data;
-        this.setState({ songsData: songsData });
+        this.setState({ songsData });
+        console.log(songsData);
       });
   }
 
+  //Method to key object keys as TABLE HEADERS
+  tableHeaders = () => {
+    const { songsData } = this.state;
+    const header = Object.keys(songsData[0]);
+    console.log(header);
+    return header.map((el) => {
+      return <th key={el}>{el}</th>;
+    });
+  };
+
   render() {
-    return (
+    return this.state.songsData.length > 0 ? (
       <table>
-        {this.state.songsData.map((songRecord) => {
-          return (
-            <fragment>
-              <tr>{songRecord.id}</tr>
-              <tr>{songRecord.title}</tr>
-              <tr>{songRecord.album}</tr>
-              <tr>{songRecord.artist}</tr>
-              <tr>{songRecord.genre}</tr>
-              <tr>{songRecord.releaseDate}</tr>
-            </fragment>
-          );
-        })}
+        <thead>
+          <tr>{this.tableHeaders()}</tr>
+        </thead>
+        {/* <tbody>{this.tableBody()}</tbody> */}
       </table>
+    ) : (
+      <div>No results Found</div>
     );
   }
 }
 
 export default GetAllSongs;
-
-// fetchSongs() {
-//   axios
-//     .get("http://www.devcodecampmusiclibrary.com/api/music")
-//     .then((response) => {
-//       console.log(response.data);
-//       this.setState({ songsData: response.data });
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// }
