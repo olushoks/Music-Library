@@ -48,15 +48,12 @@
 }
 
 .home {
-  height: 20vh;
-  width: 100vw;
   border-bottom: 0.2rem solid#fd6b02d5;
+  margin-bottom: 1rem;
 }
 
 .home-text-block {
   text-align: center;
-  /* position: absolute; */
-  /* top: 40%; */
 }
 
 .home-text-block h1 {
@@ -71,4 +68,5 @@
 .home-text-block h3 {
   font-style: italic;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }

@@ -1,0 +1,15 @@
+.table-block {
+  border: 0.3rem solid #fd6b02d5;
+  margin: auto;
+  width: auto;
+}
+
+.table-header {
+  background-color: #fd6b02d5;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/* tr {
+  background-color: #424242;
+} */

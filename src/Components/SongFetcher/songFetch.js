@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./songFetch.css";
 import axios from "axios";
 
 class GetAllSongs extends Component {
@@ -13,7 +14,6 @@ class GetAllSongs extends Component {
       .then((response) => {
         const songsData = response.data;
         this.setState({ songsData });
-        console.log(songsData);
       });
   }
 
@@ -21,7 +21,6 @@ class GetAllSongs extends Component {
   tableHeaders = () => {
     const { songsData } = this.state;
     const header = Object.keys(songsData[0]);
-    console.log(header);
     return header.map((el) => {
       return <th key={el}>{el}</th>;
     });
@@ -45,8 +44,8 @@ class GetAllSongs extends Component {
 
   render() {
     return this.state.songsData.length > 0 ? (
-      <table>
-        <thead>
+      <table className="table-block">
+        <thead className="table-header">
           <tr>{this.tableHeaders()}</tr>
         </thead>
         <tbody>{this.tableBody()}</tbody>

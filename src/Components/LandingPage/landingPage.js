@@ -1,6 +1,4 @@
 import React from "react";
-// import "bootsrap/dist/css/bootstrap.css";
-// import { Router } from "@reach/router";
 import "./landingPage.css";
 
 function LandingPage() {
