@@ -5,7 +5,7 @@ import axios from "axios";
 class GetAllSongs extends Component {
   constructor(props) {
     super(props);
-    this.state = { songsData: [] };
+    this.state = { songsData: [], headers: [] };
   }
 
   async componentDidMount() {
@@ -15,6 +15,11 @@ class GetAllSongs extends Component {
         const songsData = response.data;
         this.setState({ songsData });
       });
+    const headers = Object.keys(this.state.songsData[0]);
+    this.setState({ headers });
+
+    console.log(this.state.headers);
+    console.log(this.state.songsData);
   }
 
   //Method to key object keys as TABLE HEADERS

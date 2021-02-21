@@ -16,15 +16,15 @@ class Filter extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
-    // console.log(filterCriteria, searchFor);
+    console.log(filterCriteria, searchFor);
   };
 
   render() {
     return (
       <div>
         <form>
-          <label for="filterCriteria">Filter the Music Library</label>
-          <select name="filterCriteria" id="filterCriteria" autofocus required>
+          <label htmlFor="filterCriteria">Filter the Music Library</label>
+          <select name="filterCriteria" id="filterCriteria" autoFocus required>
             <option></option>
             <option value="title" onChange={this.handleChange}>
               title
@@ -47,7 +47,7 @@ class Filter extends Component {
             placeholder="enter text to filter by"
             onChange={this.handleChange}
           ></input>
-          <input type="submit" value="Filter"></input>
+          <input type="submit" value="Filter" onClick={() => {}}></input>
         </form>
         <GetAllSongs />
       </div>
