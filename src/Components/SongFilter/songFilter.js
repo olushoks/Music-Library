@@ -1,58 +1,33 @@
 import React, { Component } from "react";
-import GetAllSongs from "../SongFetcher/songFetch";
 import "./songFilter.css";
 
-class Filter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filterCriteria: "",
-      searchFor: "",
-    };
-  }
-
-  handleChange = (event) => {
-    const { filterCriteria, searchFor } = this.state;
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-    console.log(filterCriteria, searchFor);
-  };
-
-  render() {
-    return (
-      <div>
-        <form>
-          <label htmlFor="filterCriteria">Filter the Music Library</label>
-          <select name="filterCriteria" id="filterCriteria" autoFocus required>
-            <option></option>
-            <option value="title" onChange={this.handleChange}>
-              title
+function Filter(props) {
+  return (
+    <form>
+      <label htmlFor="filterCriteria">Filter the Music Library</label>
+      <select
+        name="filterCriteria"
+        id="filterCriteria"
+        onChange={props.onChange}
+        autoFocus
+        required
+      >
+        {props.selectOptions.map((option) => {
+          return (
+            <option key={option} value={option}>
+              {option}
             </option>
-            <option value="album" onChange={this.handleChange}>
-              Album
-            </option>
-            <option value="artist" onChange={this.handleChange}>
-              Artist
-            </option>
-            <option value="genre" onChange={this.handleChange}>
-              Genre
-            </option>
-            <option value="releaseDate" onChange={this.handleChange}>
-              Release Date
-            </option>
-          </select>
-          <input
-            type="text"
-            placeholder="enter text to filter by"
-            onChange={this.handleChange}
-          ></input>
-          <input type="submit" value="Filter" onClick={() => {}}></input>
-        </form>
-        <GetAllSongs />
-      </div>
-    );
-  }
+          );
+        })}
+      </select>
+      <input
+        type="text"
+        placeholder="enter text to filter by"
+        onChange={props.onChange}
+      ></input>
+      <input type="submit" value="Filter" onClick={props.onClick}></input>
+    </form>
+  );
 }
 
 export default Filter;

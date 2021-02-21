@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./songFetch.css";
+import Filter from "../SongFilter/songFilter";
 import axios from "axios";
 
 class GetAllSongs extends Component {
@@ -48,7 +49,17 @@ class GetAllSongs extends Component {
     });
   };
 
-  render() {
+  // const renderTable = this.state.songsData.length > 0 ? (
+  //       <table className="table-block">
+  //         <thead className="table-header">
+  //           <tr>{this.tableHeaders()}</tr>
+  //         </thead>
+  //         <tbody>{this.tableBody()}</tbody>
+  //       </table>
+  //       ) : (<div>No results Found</div>
+  //       )
+
+  renderTable = () => {
     return this.state.songsData.length > 0 ? (
       <table className="table-block">
         <thead className="table-header">
@@ -58,6 +69,19 @@ class GetAllSongs extends Component {
       </table>
     ) : (
       <div>No results Found</div>
+    );
+  };
+
+  render() {
+    return (
+      <div>
+        <Filter
+          selectOptions={this.state.headers}
+          onChange={this.handleChange}
+          onCliick={this.handleClick}
+        />
+        {this.renderTable()};
+      </div>
     );
   }
 }
