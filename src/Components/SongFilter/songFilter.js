@@ -8,7 +8,7 @@ function Filter(props) {
       <select
         name="filterCriteria"
         id="filterCriteria"
-        onChange={props.onChange}
+        onChange={props.onFilterChange}
         autoFocus
         required
       >
@@ -25,7 +25,7 @@ function Filter(props) {
       <input
         type="text"
         placeholder="enter text to filter by"
-        onChange={props.onChange}
+        onChange={props.onTextChange}
       ></input>
       <input type="submit" value="Filter" onClick={props.onClick}></input>
     </form>
