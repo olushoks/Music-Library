@@ -6,7 +6,7 @@ import axios from "axios";
 class GetAllSongs extends Component {
   constructor(props) {
     super(props);
-    this.state = { songsData: [], headers: [] };
+    this.state = { songsData: [], headers: [], filterBy: null, filterText: "" };
   }
 
   async componentDidMount() {
@@ -49,16 +49,7 @@ class GetAllSongs extends Component {
     });
   };
 
-  // const renderTable = this.state.songsData.length > 0 ? (
-  //       <table className="table-block">
-  //         <thead className="table-header">
-  //           <tr>{this.tableHeaders()}</tr>
-  //         </thead>
-  //         <tbody>{this.tableBody()}</tbody>
-  //       </table>
-  //       ) : (<div>No results Found</div>
-  //       )
-
+  // Function to call to render table
   renderTable = () => {
     return this.state.songsData.length > 0 ? (
       <table className="table-block">

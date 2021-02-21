@@ -13,11 +13,13 @@ function Filter(props) {
         required
       >
         {props.selectOptions.map((option) => {
-          return (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          );
+          if (option !== "id") {
+            return (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            );
+          }
         })}
       </select>
       <input
