@@ -9,9 +9,9 @@ class GetAllSongs extends Component {
     this.state = {
       songsData: [],
       headers: [],
-      filteredSongsData: [],
+      currentTable: [],
       filterBy: undefined,
-      filterText: undefined,
+      filterText: "",
     };
   }
 
@@ -20,15 +20,15 @@ class GetAllSongs extends Component {
       .get("http://www.devcodecampmusiclibrary.com/api/music")
       .then((response) => {
         const songsData = response.data;
-        this.setState({ songsData });
+        this.setState({ songsData, currentTable: songsData });
       });
 
     // Get keys to use as table headers and filter options
     const headers = Object.keys(this.state.songsData[0]);
     this.setState({ headers });
 
-    console.log(this.state.headers);
-    console.log(this.state.songsData);
+    // console.log(this.state.headers);
+    // console.log(this.state.songsData);
   }
 
   //Method to key object keys as TABLE HEADERS
@@ -40,8 +40,8 @@ class GetAllSongs extends Component {
 
   //Method to get TABLE BODY DATA
   tableBody = () => {
-    const { songsData } = this.state;
-    return songsData.map((el) => {
+    const { currentTable } = this.state;
+    return currentTable.map((el) => {
       return (
         <tr key={el.id}>
           <td>{el.id}</td>
@@ -58,27 +58,41 @@ class GetAllSongs extends Component {
   // Handle change in Filter Criteria
   handleChangeFilterCriteria = (e) => {
     e.preventDefault();
-    const { filterBy } = this.state;
+    const filterBy = e.target.value;
     this.setState({
-      filterBy: e.target.value,
+      filterBy,
     });
-    console.log(this.state.filterBy);
+    // console.log(filterBy);
   };
 
   // Handle change in Filter Text
   handleChangeFilterText = (e) => {
     e.preventDefault();
-    const { filterText } = this.state;
+    const filterText = e.target.value;
     this.setState({
-      filterText: e.target.value,
+      filterText,
     });
-
-    console.log(this.state.filterText);
+    // console.log(filterText);
   };
 
   // Filter Button Click
   handleClick = (e) => {
     e.preventDefault();
+    let { filterBy, filterText, currentTable, songsData } = this.state;
+    if (filterBy !== undefined && filterText !== undefined) {
+      currentTable = songsData.filter((el) => {
+        if (el[filterBy].includes(filterText)) {
+          return true;
+        }
+      });
+    }
+    this.setState({
+      currentTable,
+    });
+    console.log(currentTable);
+    console.log(songsData);
+    console.log(filterBy);
+    console.log(filterText);
   };
 
   // Function to call to render table
@@ -102,7 +116,7 @@ class GetAllSongs extends Component {
           selectOptions={this.state.headers}
           onFilterChange={this.handleChangeFilterCriteria}
           onTextChange={this.handleChangeFilterText}
-          onCliick={this.handleClick}
+          onClick={this.handleClick}
         />
         {this.renderTable()}
       </div>

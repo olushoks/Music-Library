@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./songFilter.css";
 
 function Filter(props) {
@@ -13,13 +13,14 @@ function Filter(props) {
         required
       >
         {props.selectOptions.map((option) => {
-          if (option !== "id") {
-            return (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            );
+          if (option === "id") {
+            return <option key={""}>{}</option>;
           }
+          return (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          );
         })}
       </select>
       <input
@@ -27,7 +28,7 @@ function Filter(props) {
         placeholder="enter text to filter by"
         onChange={props.onTextChange}
       ></input>
-      <input type="submit" value="Filter" onClick={props.onClick}></input>
+      <button onClick={props.onClick}>Filter</button>
     </form>
   );
 }
