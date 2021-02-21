@@ -15,6 +15,8 @@ class GetAllSongs extends Component {
         const songsData = response.data;
         this.setState({ songsData });
       });
+
+    // Get keys to use as table headers and filter options
     const headers = Object.keys(this.state.songsData[0]);
     this.setState({ headers });
 
@@ -24,14 +26,12 @@ class GetAllSongs extends Component {
 
   //Method to key object keys as TABLE HEADERS
   tableHeaders = () => {
-    const { songsData } = this.state;
-    const header = Object.keys(songsData[0]);
-    return header.map((el) => {
+    return this.state.headers.map((el) => {
       return <th key={el}>{el}</th>;
     });
   };
 
-  //Method to TABLE BODY DATA
+  //Method to get TABLE BODY DATA
   tableBody = () => {
     const { songsData } = this.state;
     return songsData.map((el) => {
