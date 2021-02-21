@@ -1,12 +1,12 @@
 import React from "react";
 import LandingPage from "./LandingPage/landingPage";
-import GetAllSongs from "./SongFetcher/songFetch";
+import Filter from "./SongFilter/songFilter.js";
 
 function App() {
   return (
     <div>
       <LandingPage />
-      <GetAllSongs />
+      <Filter />
     </div>
   );
 }

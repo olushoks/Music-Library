@@ -26,6 +26,7 @@ class GetAllSongs extends Component {
     });
   };
 
+  //Method to TABLE BODY DATA
   tableBody = () => {
     const { songsData } = this.state;
     return songsData.map((el) => {
