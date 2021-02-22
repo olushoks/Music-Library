@@ -3,7 +3,7 @@ import "./songFilter.css";
 
 function Filter(props) {
   return (
-    <form className="form form-group">
+    <form className="form">
       <label className="label" htmlFor="filterCriteria">
         Filter the Music Library
       </label>

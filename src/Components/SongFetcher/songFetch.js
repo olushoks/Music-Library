@@ -26,12 +26,17 @@ class GetAllSongs extends Component {
 
     // Get keys to use as table headers and filter options
     const headers = Object.keys(this.state.songsData[0]);
+    // Capitalize the text in the filter selection
+    headers[headers.indexOf("releaseDate")] = "Release Date";
     this.setState({ headers });
   }
 
   //Method to key object keys as TABLE HEADERS
   tableHeaders = () => {
     return this.state.headers.map((el) => {
+      if (el === "releaseDate") {
+        el = "Release Date";
+      }
       return (
         <th key={el} scope="col">
           {el}
@@ -80,9 +85,6 @@ class GetAllSongs extends Component {
     e.preventDefault();
     let { filterBy, filterText, currentTable, songsData } = this.state;
 
-    // if (filterText === undefined && filterBy === undefined) {
-    //   alert("Please narrow you search!");
-    // }
     if (filterBy === undefined) {
       alert("Choose an option to filter by!");
     }
@@ -109,10 +111,6 @@ class GetAllSongs extends Component {
     this.setState({
       currentTable,
     });
-    // console.log(currentTable);
-    // console.log(songsData);
-    // console.log(filterBy);
-    // console.log(filterText);
   };
 
   clearFilter = (e) => {
