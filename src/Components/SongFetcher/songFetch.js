@@ -22,7 +22,7 @@ class GetAllSongs extends Component {
         const songsData = response.data;
         this.setState({ songsData, currentTable: songsData });
       })
-      .catch(alert("Loading"));
+      .catch(console.log("Loading"));
 
     // Get keys to use as table headers and filter options
     const headers = Object.keys(this.state.songsData[0]);
@@ -32,7 +32,11 @@ class GetAllSongs extends Component {
   //Method to key object keys as TABLE HEADERS
   tableHeaders = () => {
     return this.state.headers.map((el) => {
-      return <th key={el}>{el}</th>;
+      return (
+        <th key={el} scope="col">
+          {el}
+        </th>
+      );
     });
   };
 
@@ -41,7 +45,7 @@ class GetAllSongs extends Component {
     const { currentTable } = this.state;
     return currentTable.map((el) => {
       return (
-        <tr key={el.id}>
+        <tr key={el.id} className="">
           <td>{el.id}</td>
           <td>{el.title}</td>
           <td>{el.album}</td>
@@ -128,7 +132,7 @@ class GetAllSongs extends Component {
   // Function to call to render table
   renderTable = () => {
     return this.state.songsData.length > 0 ? (
-      <table className="table-block">
+      <table className="table-block table table-hover">
         <thead className="table-header">
           <tr>{this.tableHeaders()}</tr>
         </thead>
