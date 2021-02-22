@@ -1,52 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Roboto:wght@300&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
-.landing {
-  height: 100vh;
-  width: 100vw;
-  background: #fd6b02d5;
-  /* background: #fd6a02; */
+.music-icon {
+  color: #f4af1b;
+  margin: auto 2rem;
 }
-
-.landing-text-block {
-  text-align: center;
-  position: relative;
-  top: 40%;
-}
-
-.landing-text-block h1 {
-  font-family: "Berkshire Swash", cursive;
-  text-transform: uppercase;
-  font-size: 5rem;
-  padding: 0;
-}
-
-.landing-text-block h3 {
-  font-style: italic;
-  margin-top: 1rem;
-}
-
-.btn {
-  margin-top: 2rem;
-  padding: 1rem 2rem;
-  background: transparent;
-  border: 0.2rem solid #ffffff;
-  border-radius: 0.5rem;
-  font-size: 2rem;
-  font-family: "Berkshire Swash", cursive;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background: #ffffff;
-  color: #fd6b02d5;
-}
-
 .home {
   border-bottom: 0.2rem ridge #00154f;
   margin-bottom: 1rem;

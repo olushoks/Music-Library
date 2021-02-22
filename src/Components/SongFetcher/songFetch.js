@@ -124,12 +124,14 @@ class GetAllSongs extends Component {
   // Function to call to render table
   renderTable = () => {
     return this.state.songsData.length > 0 ? (
-      <table className="table table-block table-hover">
-        <thead className="table-header">
-          <tr>{this.tableHeaders()}</tr>
-        </thead>
-        <tbody>{this.tableBody()}</tbody>
-      </table>
+      <div>
+        <table className="table table-block table-hover">
+          <thead className="table-header">
+            <tr>{this.tableHeaders()}</tr>
+          </thead>
+          <tbody>{this.tableBody()}</tbody>
+        </table>
+      </div>
     ) : (
       <div>No results Found</div>
     );

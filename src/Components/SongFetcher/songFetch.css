@@ -1,7 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Roboto:wght@300&display=swap");
+
+div table {
+  overflow-x: auto;
+  width: auto;
+  margin: 2rem 3rem;
+}
 .table-block {
   border: 0.3rem solid transparent;
-  margin: 2rem 3rem !important;
-  width: 80%;
+  font-family: "Roboto", sans-serif;
 }
 
 .table-header {
@@ -31,4 +37,10 @@ td {
   padding: 0.5rem 1rem;
   text-align: left;
   vertical-align: bottom !important;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
 }
