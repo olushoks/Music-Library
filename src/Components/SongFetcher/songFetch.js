@@ -10,7 +10,7 @@ class GetAllSongs extends Component {
       songsData: [],
       headers: [],
       currentTable: [],
-      filterBy: undefined,
+      filterBy: "",
       filterText: "",
     };
   }
@@ -21,14 +21,12 @@ class GetAllSongs extends Component {
       .then((response) => {
         const songsData = response.data;
         this.setState({ songsData, currentTable: songsData });
-      });
+      })
+      .catch(alert("Loading"));
 
     // Get keys to use as table headers and filter options
     const headers = Object.keys(this.state.songsData[0]);
     this.setState({ headers });
-
-    // console.log(this.state.headers);
-    // console.log(this.state.songsData);
   }
 
   //Method to key object keys as TABLE HEADERS
@@ -62,7 +60,6 @@ class GetAllSongs extends Component {
     this.setState({
       filterBy,
     });
-    // console.log(filterBy);
   };
 
   // Handle change in Filter Text
@@ -72,27 +69,60 @@ class GetAllSongs extends Component {
     this.setState({
       filterText,
     });
-    // console.log(filterText);
   };
 
   // Filter Button Click
-  handleClick = (e) => {
+  filterTable = (e) => {
     e.preventDefault();
     let { filterBy, filterText, currentTable, songsData } = this.state;
-    if (filterBy !== undefined && filterText !== undefined) {
-      currentTable = songsData.filter((el) => {
+
+    // if (filterText === undefined && filterBy === undefined) {
+    //   alert("Please narrow you search!");
+    // }
+    if (filterBy === undefined) {
+      alert("Choose an option to filter by!");
+    }
+    if (filterText === undefined) {
+      alert("Enter some text!");
+    }
+
+    if (filterBy && filterText) {
+      currentTable = songsData.filter((el, index) => {
         if (el[filterBy].includes(filterText)) {
+          el.ID = index + 1;
           return true;
         }
+        return false;
       });
     }
+    // if (filterBy !== undefined && filterText !== undefined) {
+    //   currentTable = songsData.filter((el) => {
+    //     if (el[filterBy].includes(filterText)) {
+    //       return true;
+    //     }
+    //   });
+    // }
     this.setState({
       currentTable,
     });
-    console.log(currentTable);
-    console.log(songsData);
-    console.log(filterBy);
-    console.log(filterText);
+    // console.log(currentTable);
+    // console.log(songsData);
+    // console.log(filterBy);
+    // console.log(filterText);
+  };
+
+  clearFilter = (e) => {
+    e.preventDefault();
+    let { filterBy, filterText, currentTable, songsData } = this.state;
+    currentTable = songsData;
+    filterBy = "";
+    filterText = "";
+
+    this.setState({
+      currentTable,
+      filterBy,
+      filterText,
+    });
   };
 
   // Function to call to render table
@@ -116,7 +146,8 @@ class GetAllSongs extends Component {
           selectOptions={this.state.headers}
           onFilterChange={this.handleChangeFilterCriteria}
           onTextChange={this.handleChangeFilterText}
-          onClick={this.handleClick}
+          filter={this.filterTable}
+          clearFilter={this.clearFilter}
         />
         {this.renderTable()}
       </div>

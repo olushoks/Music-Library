@@ -28,7 +28,8 @@ function Filter(props) {
         placeholder="enter text to filter by"
         onChange={props.onTextChange}
       ></input>
-      <button onClick={props.onClick}>Filter</button>
+      <button onClick={props.filter}>Filter</button>
+      <button onClick={props.clearFilter}>Clear Filter</button>
     </form>
   );
 }
