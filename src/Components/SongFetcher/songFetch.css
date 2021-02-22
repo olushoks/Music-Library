@@ -1,18 +1,19 @@
 .table-block {
   border: 0.3rem solid transparent;
-  margin: 2rem 2rem;
-  width: 100%;
+  margin: 2rem 3rem !important;
+  width: 80%;
 }
 
 .table-header {
   background-color: #00154f;
   color: #f4af1b;
   text-transform: uppercase;
+  /* padding: 2rem 4rem !important; */
 }
 
-/* .table-row {
-  border-right: yellow;
-} */
+.table-row:hover {
+  color: #00154f !important;
+}
 
 .table-row:nth-child(odd) {
   background-color: #f4af1b;
@@ -26,8 +27,8 @@
   opacity: 0.7;
 }
 
-/* th,
 td {
   padding: 0.5rem 1rem;
   text-align: left;
-} */
+  vertical-align: bottom !important;
+}

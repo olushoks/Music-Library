@@ -48,7 +48,7 @@
 }
 
 .home {
-  border-bottom: 0.2rem solid#fd6b02d5;
+  border-bottom: 0.2rem ridge #00154f;
   margin-bottom: 1rem;
 }
 
@@ -58,7 +58,7 @@
 
 .home-text-block h1 {
   font-family: "Berkshire Swash", cursive;
-  color: #fd6b02d5;
+  color: #00154f;
   text-transform: uppercase;
   font-size: 4rem;
   padding: 0;
@@ -71,4 +71,6 @@
   font-size: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  color: #00154f;
+  /* color: #f4af1b; */
 }
