@@ -1,11 +1,11 @@
 .table-block {
-  border: 0.3rem solid #fd6b02d5;
-  margin: auto;
-  width: auto;
+  border: 0.3rem solid transparent;
+  margin: 2rem 2rem;
+  width: 100%;
 }
 
 .table-header {
-  background-color: #fd6b02d5;
-  color: #ffffff;
+  background-color: #fffb00e7;
+  color: #19ee47;
   text-transform: uppercase;
 }

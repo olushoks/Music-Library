@@ -84,6 +84,7 @@ class GetAllSongs extends Component {
   filterTable = (e) => {
     e.preventDefault();
     let { filterBy, filterText, currentTable, songsData } = this.state;
+    filterBy = filterBy === "Release Date" ? "releaseDate" : filterBy;
 
     if (filterBy === undefined) {
       alert("Choose an option to filter by!");
@@ -95,19 +96,12 @@ class GetAllSongs extends Component {
     if (filterBy && filterText) {
       currentTable = songsData.filter((el, index) => {
         if (el[filterBy].includes(filterText)) {
-          el.ID = index + 1;
+          // el.ID = index + 1;
           return true;
         }
         return false;
       });
     }
-    // if (filterBy !== undefined && filterText !== undefined) {
-    //   currentTable = songsData.filter((el) => {
-    //     if (el[filterBy].includes(filterText)) {
-    //       return true;
-    //     }
-    //   });
-    // }
     this.setState({
       currentTable,
     });
@@ -130,7 +124,7 @@ class GetAllSongs extends Component {
   // Function to call to render table
   renderTable = () => {
     return this.state.songsData.length > 0 ? (
-      <table className="table-block table table-hover">
+      <table className="table table-block table-hover">
         <thead className="table-header">
           <tr>{this.tableHeaders()}</tr>
         </thead>
