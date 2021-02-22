@@ -133,7 +133,9 @@ class GetAllSongs extends Component {
         </table>
       </div>
     ) : (
-      <div>No results Found</div>
+      <div className="no-result">
+        Unable to access the Songs Library at this time!
+      </div>
     );
   };
 
