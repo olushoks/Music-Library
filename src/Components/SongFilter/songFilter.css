@@ -2,34 +2,51 @@
 
 .form {
   height: auto;
-  border: solid #000000 0.2rem;
+  /* border: solid #000000 0.2rem; */
   padding: 0.5rem 0.3rem;
   transform: translateY(10%);
   text-align: center;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  color: #00154f;
 }
 
 .label {
-  font-weight: bold;
+  font-weight: 900;
+  text-decoration: underline;
+  margin-right: 0.5rem;
+  font-style: italic;
 }
 
 .select {
-  border: ridge #000000 0.2rem;
+  border: ridge #f4af1b 0.2rem;
   margin: 0 0.2rem;
   text-transform: capitalize;
+  border-radius: 0.3rem;
 }
 
 .input {
-  border: ridge #000000 0.2rem;
+  border: ridge #f4af1b 0.2rem;
+  border-radius: 0.3rem;
   margin: 0 0.2rem;
+  padding-left: 0.5rem;
 }
 
+.input:hover,
+.select:hover {
+  border-color: #00154f;
+}
 .button {
-  border: inset #000000 0.2rem;
+  border: ridge transparent 0.2rem;
+  background-color: #00154f;
+  color: #f4af1b;
   border-radius: 0.5rem 1rem;
   text-align: center;
   padding: 0.05rem 0.3rem;
   margin: 0 0.2rem;
   width: 8rem;
+  font-size: 0.9rem;
+}
+.button:hover {
+  font-size: 1rem;
 }
