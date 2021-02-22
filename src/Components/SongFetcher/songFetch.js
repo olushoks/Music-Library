@@ -50,7 +50,7 @@ class GetAllSongs extends Component {
     const { currentTable } = this.state;
     return currentTable.map((el) => {
       return (
-        <tr key={el.id} className="">
+        <tr key={el.id} className="table-row">
           <td>{el.id}</td>
           <td>{el.title}</td>
           <td>{el.album}</td>
