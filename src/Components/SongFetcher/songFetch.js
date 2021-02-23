@@ -48,18 +48,32 @@ class GetAllSongs extends Component {
   //Method to get TABLE BODY DATA
   tableBody = () => {
     const { currentTable } = this.state;
-    return currentTable.map((el) => {
-      return (
-        <tr key={el.id} className="table-row">
-          <td>{el.id}</td>
-          <td>{el.title}</td>
-          <td>{el.album}</td>
-          <td>{el.artist}</td>
-          <td>{el.genre}</td>
-          <td>{el.releaseDate}</td>
+    let tableRows = [];
+    for (let i = 0; i < currentTable.length; i++) {
+      tableRows.push(
+        <tr key={i} className="table-row">
+          <td>{i + 1}</td>
+          <td>{currentTable[i].title}</td>
+          <td>{currentTable[i].album}</td>
+          <td>{currentTable[i].artist}</td>
+          <td>{currentTable[i].genre}</td>
+          <td>{currentTable[i].releaseDate}</td>
         </tr>
       );
-    });
+    }
+    return tableRows;
+    // return currentTable.map((el) => {
+    //   return (
+    //     <tr key={el.id} className="table-row">
+    //       <td>{el.id}</td>
+    //       <td>{el.title}</td>
+    //       <td>{el.album}</td>
+    //       <td>{el.artist}</td>
+    //       <td>{el.genre}</td>
+    //       <td>{el.releaseDate}</td>
+    //     </tr>
+    //   );
+    // });
   };
 
   // Handle change in Filter Criteria
