@@ -62,18 +62,6 @@ class GetAllSongs extends Component {
       );
     }
     return tableRows;
-    // return currentTable.map((el) => {
-    //   return (
-    //     <tr key={el.id} className="table-row">
-    //       <td>{el.id}</td>
-    //       <td>{el.title}</td>
-    //       <td>{el.album}</td>
-    //       <td>{el.artist}</td>
-    //       <td>{el.genre}</td>
-    //       <td>{el.releaseDate}</td>
-    //     </tr>
-    //   );
-    // });
   };
 
   // Handle change in Filter Criteria
@@ -110,7 +98,6 @@ class GetAllSongs extends Component {
     if (filterBy && filterText) {
       currentTable = songsData.filter((el, index) => {
         if (el[filterBy].includes(filterText)) {
-          // el.ID = index + 1;
           return true;
         }
         return false;
