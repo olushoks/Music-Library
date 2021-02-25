@@ -90,7 +90,8 @@ class GetAllSongs extends Component {
   // Handle change in Filter Text
   handleChangeFilterText = (e) => {
     e.preventDefault();
-    const filterText = e.target.value;
+    let filterText = e.target.value;
+    filterText = filterText.toLowerCase();
     this.setState({
       filterText,
     });
@@ -110,8 +111,9 @@ class GetAllSongs extends Component {
     }
 
     if (filterBy && filterText) {
-      currentTable = songsData.filter((el, index) => {
-        if (el[filterBy].includes(filterText)) {
+      // filterText = filterText.toLowerCase();
+      currentTable = songsData.filter((el) => {
+        if (el[filterBy].toLowerCase().includes(filterText)) {
           return true;
         }
         return false;
@@ -123,7 +125,7 @@ class GetAllSongs extends Component {
   };
 
   clearFilter = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     let { filterBy, filterText, currentTable, songsData } = this.state;
     currentTable = songsData;
     filterBy = "";
