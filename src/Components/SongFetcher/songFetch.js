@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./songFetch.css";
 import Filter from "../SongFilter/songFilter";
+import "./songFetch.css";
 import axios from "axios";
 
 class GetAllSongs extends Component {
