@@ -13,7 +13,6 @@ function Filter(props) {
           name="filterCriteria"
           id="filterCriteria"
           onChange={props.onFilterChange}
-          autoFocus
           required
         >
           {props.selectOptions.map((option) => {
