@@ -4,82 +4,73 @@ import "./moreActions.css";
 class MoreAction extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { action: "" };
   }
 
-  getAction = (evt) => {
-    // this.setState({ action: evt.target.value });
-    const action = evt.target.value;
-    // alert(`You want to ${action}`);
-    console.log(`${action}`);
-    this.displayActionForm(action);
+  actionToPerform = (e) => {
+    this.setState({ action: e.target.value });
   };
 
-  displayActionForm = (action) => {
+  // Generate form based on action choose by user
+  generateActionForm = () => {
+    let { action } = this.state;
     if (action === "get") {
+      console.log(`Clicked ${action}`);
+      console.log(`Clicked ${this.state.action}`);
       return (
         <form>
-          <label>Get Song By ID:</label>
-          <input type="number"></input>
+          <label>Enter Song ID</label>
+          <input type="text" name="id"></input>
         </form>
       );
     }
 
     if (action === "add") {
-      return null;
+      console.log(`Clicked ${action}`);
+      console.log(`Clicked ${this.state.action}`);
+      return <form></form>;
     }
 
     if (action === "edit") {
+      console.log(`Clicked ${action}`);
+      console.log(`Clicked ${this.state.action}`);
       return null;
     }
 
     if (action === "delete") {
+      console.log(`Clicked ${action}`);
+      console.log(`Clicked ${this.state.action}`);
       return null;
     }
   };
 
-  // Radio Button Formm
+  // MORE ACTION BUTTONS
   actionButtons = () => {
     return (
       <div>
-        <button value="get" onClick={this.displayActionForm}>
+        <button value="get" onClick={this.actionToPerform}>
           Get Song By ID
         </button>
-        <button value="add" onClick={this.displayActionForm}>
+        <button value="add" onClick={this.actionToPerform}>
           ADD NEW SONG
         </button>
-        <button value="edit" onClick={this.displayActionForm}>
+        <button value="edit" onClick={this.actionToPerform}>
           EDIT SONG
         </button>
-        <button value="delete" onClick={this.displayActionForm}>
+        <button value="delete" onClick={this.actionToPerform}>
           DELETE SONG
         </button>
       </div>
-      /*
-      <form onChange={this.getAction}>
-        <label>
-          <input type="radio" name="action" value="get"></input>
-          Get Song By ID
-        </label>
-        <label>
-          <input type="radio" name="action" value="add"></input>
-          Add New Song
-        </label>
-        <label>
-          <input type="radio" name="action" value="edit"></input>
-          Edit Song Detail
-        </label>
-        <label>
-          <input type="radio" name="action" value="delete"></input>
-          Delete Song
-        </label>
-      </form>
-      */
     );
   };
 
   render() {
-    return <div>{this.actionButtons()}</div>;
+    return (
+      <div>
+        {this.actionButtons()}
+        {this.generateActionForm()}
+      </div>
+    );
   }
 }
 
