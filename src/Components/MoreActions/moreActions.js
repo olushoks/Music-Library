@@ -229,7 +229,7 @@ class MoreAction extends Component {
     }
     if (this.state.action === "delete") {
       axios
-        .delete(`http://localhost:5000/api/songs/get/${id}`)
+        .delete(`http://localhost:5000/api/songs/delete/${id}`)
         .then((res) => {
           const response = res.data;
           console.log(response);
