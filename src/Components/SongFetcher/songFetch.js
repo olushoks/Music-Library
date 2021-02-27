@@ -18,7 +18,7 @@ class GetAllSongs extends Component {
   async componentDidMount() {
     await axios
       // .get("http://www.devcodecampmusiclibrary.com/api/music")
-      .get("http://localhost:3000/api/songs/get")
+      .get("http://localhost:5000/api/songs/get")
       .then((response) => {
         const songsData = response.data;
         this.setState({ songsData, currentTable: songsData });
