@@ -170,20 +170,23 @@ class MoreAction extends Component {
     properties[e.target.name] = e.target.value;
 
     this.setState({ properties });
-    console.log(this.state);
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const {
-      id,
-      title,
-      album,
-      artist,
-      genre,
-      releaseDate,
-    } = this.state.properties;
-    if (this.state.action === "get") {
+    let { id } = this.state.properties;
+    id = Number(id);
+    const props = this.state.properties;
+    const action = this.state.action;
+
+    // Get all properties in states property object except ID
+    const properties = {};
+    for (let prop in props) {
+      if (prop !== "id") {
+        properties[prop] = props[prop];
+      }
+    }
+    if (action === "get") {
       axios
         .get(`http://localhost:5000/api/songs/get/${id}`)
         .then((res) => {
@@ -194,13 +197,29 @@ class MoreAction extends Component {
         .catch(`Error!`);
       // console.log(this.state);
     }
-    if (this.state.action === "post") {
+    if (action === "post") {
+      axios
+        .post(`http://localhost:5000/api/songs/add`, properties)
+        .then((res) => {
+          const response = res.data;
+          console.log(response);
+          console.log(res);
+        })
+        .catch(`Error!`);
       console.log(this.state);
     }
-    if (this.state.action === "put") {
+    if (action === "put") {
+      axios
+        .put(`http://localhost:5000/api/songs/edit/${id}`, properties)
+        .then((res) => {
+          // const response = res.data;
+          // console.log(response);
+          console.log(properties);
+        })
+        .catch(`Error!`);
       console.log(this.state);
     }
-    if (this.state.action === "delete") {
+    if (action === "delete") {
       axios
         .delete(`http://localhost:5000/api/songs/delete/${id}`)
         .then((res) => {
