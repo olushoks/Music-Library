@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ActionButton from "./moreActionButtons";
 import "./moreActions.css";
 
 class MoreAction extends Component {
@@ -10,26 +11,6 @@ class MoreAction extends Component {
       properties: {},
     };
   }
-
-  // MORE ACTION BUTTONS
-  actionButtons = () => {
-    return (
-      <div>
-        <button value="get" onClick={this.actionToPerform}>
-          Get Song By ID
-        </button>
-        <button value="post" onClick={this.actionToPerform}>
-          Add New Song
-        </button>
-        <button value="put" onClick={this.actionToPerform}>
-          Edit Song
-        </button>
-        <button value="delete" onClick={this.actionToPerform}>
-          Delete Song
-        </button>
-      </div>
-    );
-  };
 
   // Get HTTP Request to perform and store in state
   actionToPerform = (e) => {
@@ -174,8 +155,7 @@ class MoreAction extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let { id } = this.state.properties;
-    id = Number(id);
+    const { id } = this.state.properties;
     const props = this.state.properties;
     const action = this.state.action;
 
@@ -235,7 +215,7 @@ class MoreAction extends Component {
   render() {
     return (
       <div>
-        {this.actionButtons()}
+        <ActionButton actionToPerform={this.actionToPerform} />
         {this.generateActionForm()}
       </div>
     );
