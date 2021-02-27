@@ -5,18 +5,24 @@ import "./moreActions.css";
 class MoreAction extends Component {
   constructor(props) {
     super(props);
-    this.state = { action: "", properties: {} };
-    // this.state = {
-    //   action: "",
-    //   properties: {
-    //     id: "",
-    //     title: "",
-    //     album: "",
-    //     artist: "",
-    //     genre: "",
-    //     releaseDate: "",
-    //   },
-    // };
+    // this.state = { action: "", properties: {} };
+    this.state = {
+      action: "",
+      id: "",
+      title: "",
+      album: "",
+      artist: "",
+      genre: "",
+      releaseDate: "",
+      // properties: {
+      //   id: "",
+      //   title: "",
+      //   album: "",
+      //   artist: "",
+      //   genre: "",
+      //   releaseDate: "",
+      // },
+    };
   }
 
   // MORE ACTION BUTTONS
@@ -49,9 +55,11 @@ class MoreAction extends Component {
     let { action } = this.state;
     if (action === "get") {
       return (
-        <form>
-          <label>Enter Song ID</label>
-          <input type="text" name="id"></input>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Enter Song ID:
+            <input type="text" name="id" onChange={this.handleChange}></input>
+          </label>
           <input type="submit" value="submit"></input>
         </form>
       );
@@ -59,25 +67,47 @@ class MoreAction extends Component {
 
     if (action === "post") {
       return (
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <label>
             Song Title:
-            <input type="text" name="title"></input>
+            <input
+              type="text"
+              name="title"
+              onChange={this.handleChange}
+            ></input>
           </label>
           <label>
             Album:
-            <input type="text" name="album"></input>
+            <input
+              type="text"
+              name="album"
+              onChange={this.handleChange}
+            ></input>
           </label>
           <label>
             Artist:
-            <input type="text" name="artist"></input>
+            <input
+              type="text"
+              name="artist"
+              onChange={this.handleChange}
+            ></input>
           </label>
           <label>
             Genre:
-            <input type="text" name="genre"></input>
+            <input
+              type="text"
+              name="genre"
+              onChange={this.handleChange}
+            ></input>
           </label>
-          <label>Release Date:</label>
-          <input type="text" name="releaseDate"></input>
+          <label>
+            Release Date:
+            <input
+              type="text"
+              name="releaseDate"
+              onChange={this.handleChange}
+            ></input>
+          </label>
           <input type="submit" value="submit"></input>
         </form>
       );
@@ -85,32 +115,52 @@ class MoreAction extends Component {
 
     if (action === "put") {
       return (
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <label>
             Song ID:
-            <input type="text" name="title"></input>
+            <input type="text" name="id" onChange={this.handleChange}></input>
           </label>
           <label>
             Song Title:
-            <input type="text" name="title"></input>
+            <input
+              type="text"
+              name="title"
+              onChange={this.handleChange}
+            ></input>
           </label>
           <label>
             Album:
-            <input type="text" name="album"></input>
+            <input
+              type="text"
+              name="album"
+              onChange={this.handleChange}
+            ></input>
           </label>
           <label>
             Artist:
-            <input type="text" name="artist"></input>
+            <input
+              type="text"
+              name="artist"
+              onChange={this.handleChange}
+            ></input>
           </label>
           <label>
             Genre:
-            <input type="text" name="genre"></input>
+            <input
+              type="text"
+              name="genre"
+              onChange={this.handleChange}
+            ></input>
           </label>
           <label>
             Release Date:
-            <input type="text" name="releaseDate"></input>
-            <input type="submit" value="submit"></input>
+            <input
+              type="text"
+              name="releaseDate"
+              onChange={this.handleChange}
+            ></input>
           </label>
+          <input type="submit" value="submit"></input>
         </form>
       );
     }
@@ -118,8 +168,10 @@ class MoreAction extends Component {
     if (action === "delete") {
       return (
         <form onSubmit={this.handleSubmit}>
-          <label>Enter Song ID</label>
-          <input type="text" name="id" onChange={this.handleChange}></input>
+          <label>
+            Enter Song ID
+            <input type="text" name="id" onChange={this.handleChange}></input>
+          </label>
           <input type="submit" value="submit"></input>
         </form>
       );
@@ -130,27 +182,61 @@ class MoreAction extends Component {
     // assign property name and value to state properties object
     let property = e.target.name;
     let propertyValue = e.target.value;
-    let properties = {};
-    properties[property] = propertyValue;
-    this.setState({ properties });
-    // console.log(this.state.properties);
-    // this.setState({ properties: { [property]: propertyValue } });
-    // console.log(this.state.properties);
-    // console.log(propertyValue);
+    switch (property) {
+      case "id":
+        this.setState({ id: propertyValue });
+        break;
+      case "title":
+        this.setState({ title: propertyValue });
+        break;
+      case "album":
+        this.setState({ album: propertyValue });
+        break;
+      case "artist":
+        this.setState({ artist: propertyValue });
+        break;
+      case "genre":
+        this.setState({ genre: propertyValue });
+        break;
+      case "releaseDate":
+        this.setState({ releaseDate: propertyValue });
+        break;
+      default:
+        return;
+    }
+    // console.log(`${property}: ${propertyValue}`);
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { id, title, album, artist, genre, releaseDate } = this.state;
     if (this.state.action === "get") {
-      axios.delete(`http://localhost:3000/api/songs/delete/{}`);
+      axios
+        .get(`http://localhost:5000/api/songs/get/${id}`)
+        .then((res) => {
+          const response = res.data;
+          console.log(response);
+          console.log(res);
+        })
+        .catch(`Error!`);
+      // console.log(this.state);
     }
     if (this.state.action === "post") {
+      console.log(this.state);
     }
     if (this.state.action === "put") {
+      console.log(this.state);
     }
     if (this.state.action === "delete") {
-      console.log(this.state.properties.id);
-      console.log(this.state.properties);
+      axios
+        .delete(`http://localhost:5000/api/songs/get/${id}`)
+        .then((res) => {
+          const response = res.data;
+          console.log(response);
+          console.log(res);
+        })
+        .catch(`Error!`);
+      console.log(this.state);
     }
   };
 
