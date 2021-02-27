@@ -5,23 +5,9 @@ import "./moreActions.css";
 class MoreAction extends Component {
   constructor(props) {
     super(props);
-    // this.state = { action: "", properties: {} };
     this.state = {
       action: "",
-      id: "",
-      title: "",
-      album: "",
-      artist: "",
-      genre: "",
-      releaseDate: "",
-      // properties: {
-      //   id: "",
-      //   title: "",
-      //   album: "",
-      //   artist: "",
-      //   genre: "",
-      //   releaseDate: "",
-      // },
+      properties: {},
     };
   }
 
@@ -180,36 +166,23 @@ class MoreAction extends Component {
 
   handleChange = (e) => {
     // assign property name and value to state properties object
-    let property = e.target.name;
-    let propertyValue = e.target.value;
-    switch (property) {
-      case "id":
-        this.setState({ id: propertyValue });
-        break;
-      case "title":
-        this.setState({ title: propertyValue });
-        break;
-      case "album":
-        this.setState({ album: propertyValue });
-        break;
-      case "artist":
-        this.setState({ artist: propertyValue });
-        break;
-      case "genre":
-        this.setState({ genre: propertyValue });
-        break;
-      case "releaseDate":
-        this.setState({ releaseDate: propertyValue });
-        break;
-      default:
-        return;
-    }
-    // console.log(`${property}: ${propertyValue}`);
+    let properties = this.state.properties;
+    properties[e.target.name] = e.target.value;
+
+    this.setState({ properties });
+    console.log(this.state);
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { id, title, album, artist, genre, releaseDate } = this.state;
+    const {
+      id,
+      title,
+      album,
+      artist,
+      genre,
+      releaseDate,
+    } = this.state.properties;
     if (this.state.action === "get") {
       axios
         .get(`http://localhost:5000/api/songs/get/${id}`)
