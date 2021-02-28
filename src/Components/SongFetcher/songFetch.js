@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Filter from "../SongFilter/songFilter";
+import MoreAction from "../MoreActions/moreActions";
 import "./songFetch.css";
 import axios from "axios";
 
@@ -159,6 +160,7 @@ class GetAllSongs extends Component {
   render() {
     return (
       <div>
+        <MoreAction />
         <Filter
           selectOptions={this.state.headers}
           onFilterChange={this.handleChangeFilterCriteria}

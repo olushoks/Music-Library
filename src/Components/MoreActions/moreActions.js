@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import ActionButton from "./moreActionButtons";
+//import GenerateActionForm from "./moreActionForms";
 import "./moreActions.css";
 
 class MoreAction extends Component {
@@ -15,6 +16,8 @@ class MoreAction extends Component {
   // Get HTTP Request to perform and store in state
   actionToPerform = (e) => {
     this.setState({ action: e.target.value });
+    this.setState({ properties: {} });
+    console.log(this.state);
   };
 
   // Condiitionally generate form based on action choosen by user
@@ -156,7 +159,7 @@ class MoreAction extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { id } = this.state.properties;
-    const props = this.state.properties;
+    let props = this.state.properties;
     const action = this.state.action;
 
     // Get all properties in states property object except ID
@@ -175,7 +178,7 @@ class MoreAction extends Component {
           console.log(res);
         })
         .catch(`Error!`);
-      // console.log(this.state);
+      console.log(this.state);
     }
     if (action === "post") {
       axios
@@ -210,12 +213,20 @@ class MoreAction extends Component {
         .catch(`Error!`);
       console.log(this.state);
     }
+    // CLEAR FORM
+    props = {};
+    this.setState({ properties: props });
   };
 
   render() {
     return (
       <div>
         <ActionButton actionToPerform={this.actionToPerform} />
+        {/* <GenerateActionForm
+          action={this.state.action}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        /> */}
         {this.generateActionForm()}
       </div>
     );
