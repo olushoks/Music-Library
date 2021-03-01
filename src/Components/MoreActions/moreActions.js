@@ -174,6 +174,7 @@ class MoreAction extends Component {
         .get(`http://localhost:5000/api/songs/get/${id}`)
         .then((res) => {
           const response = res.data;
+          props.currentTable = response;
           console.log(response);
           console.log(res);
         })

@@ -15,10 +15,8 @@ function Filter(props) {
           onChange={props.onFilterChange}
           required
         >
+          <option key={""} defaultValue=""></option>
           {props.selectOptions.map((option) => {
-            if (option === "id") {
-              return <option key={""} defaultValue=""></option>;
-            }
             return (
               <option key={option} value={option}>
                 {option}

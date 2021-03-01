@@ -36,9 +36,9 @@ class GetAllSongs extends Component {
   //Method to key object keys as TABLE HEADERS
   tableHeaders = () => {
     return this.state.headers.map((el) => {
-      if (el === "releaseDate") {
-        el = "Release Date";
-      }
+      // if (el === "releaseDate") {
+      //   el = "Release Date";
+      // }
       return (
         <th key={el} scope="col">
           {el}
@@ -62,21 +62,6 @@ class GetAllSongs extends Component {
         </tr>
       );
     });
-    //   );
-    // let tableRows = [];
-    // for (let i = 0; i < currentTable.length; i++) {
-    //   tableRows.push(
-    //     <tr key={i} className="table-row">
-    //       <td>{i + 1}</td>
-    //       <td>{currentTable[i].title}</td>
-    //       <td>{currentTable[i].album}</td>
-    //       <td>{currentTable[i].artist}</td>
-    //       <td>{currentTable[i].genre}</td>
-    //       <td>{currentTable[i].releaseDate}</td>
-    //     </tr>
-    //   );
-    // }
-    // return tableRows;
   };
 
   // Handle change in Filter Criteria
@@ -86,16 +71,22 @@ class GetAllSongs extends Component {
     this.setState({
       filterBy,
     });
+    console.log(this.state);
   };
 
   // Handle change in Filter Text
   handleChangeFilterText = (e) => {
     e.preventDefault();
     let filterText = e.target.value;
-    filterText = filterText.toLowerCase();
+
+    filterText =
+      typeof filterText === "number"
+        ? filterText.toString()
+        : filterText.toLowerCase();
     this.setState({
       filterText,
     });
+    console.log(this.state);
   };
 
   // Filter Button Click
@@ -112,8 +103,10 @@ class GetAllSongs extends Component {
     }
 
     if (filterBy && filterText) {
-      // filterText = filterText.toLowerCase();
       currentTable = songsData.filter((el) => {
+        if (String(el.id).includes(filterText)) {
+          return true;
+        }
         if (el[filterBy].toLowerCase().includes(filterText)) {
           return true;
         }
@@ -160,7 +153,7 @@ class GetAllSongs extends Component {
   render() {
     return (
       <div>
-        <MoreAction />
+        <MoreAction currentTable={this.state.currentTable} />
         <Filter
           selectOptions={this.state.headers}
           onFilterChange={this.handleChangeFilterCriteria}
