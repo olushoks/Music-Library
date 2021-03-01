@@ -35,7 +35,7 @@ class MoreAction extends Component {
               onChange={this.handleChange}
             ></input>
           </label>
-          <input type="submit" value="submit"></input>
+          <input className="submit" type="submit" value="submit"></input>
         </form>
       );
     }
@@ -150,7 +150,7 @@ class MoreAction extends Component {
               onChange={this.handleChange}
             ></input>
           </label>
-          <input type="submit" value="submit"></input>
+          <input className="submit" type="submit" value="submit"></input>
         </form>
       );
     }
@@ -167,7 +167,7 @@ class MoreAction extends Component {
               onChange={this.handleChange}
             ></input>
           </label>
-          <input type="submit" value="submit"></input>
+          <input className="submit" type="submit" value="submit"></input>
         </form>
       );
     }
