@@ -25,10 +25,15 @@ class MoreAction extends Component {
     let { action } = this.state;
     if (action === "get") {
       return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
+        <form className="more-form" onSubmit={this.handleSubmit}>
+          <label className="more-label">
             Enter Song ID:
-            <input type="text" name="id" onChange={this.handleChange}></input>
+            <input
+              className="more-input"
+              type="text"
+              name="id"
+              onChange={this.handleChange}
+            ></input>
           </label>
           <input type="submit" value="submit"></input>
         </form>
@@ -37,94 +42,109 @@ class MoreAction extends Component {
 
     if (action === "post") {
       return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
+        <form className="more-form" onSubmit={this.handleSubmit}>
+          <label className="more-label">
             Song Title:
             <input
+              className="more-input"
               type="text"
               name="title"
               onChange={this.handleChange}
             ></input>
           </label>
-          <label>
+          <label className="more-label">
             Album:
             <input
+              className="more-input"
               type="text"
               name="album"
               onChange={this.handleChange}
             ></input>
           </label>
-          <label>
+          <label className="more-label">
             Artist:
             <input
+              className="more-input"
               type="text"
               name="artist"
               onChange={this.handleChange}
             ></input>
           </label>
-          <label>
+          <label className="more-label">
             Genre:
             <input
+              className="more-input"
               type="text"
               name="genre"
               onChange={this.handleChange}
             ></input>
           </label>
-          <label>
+          <label className="more-label">
             Release Date:
             <input
+              className="more-input"
               type="text"
               name="releaseDate"
               onChange={this.handleChange}
             ></input>
           </label>
-          <input type="submit" value="submit"></input>
+          <input className="submit" type="submit" value="submit"></input>
         </form>
       );
     }
 
     if (action === "put") {
       return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
+        <form className="more-form" onSubmit={this.handleSubmit}>
+          <label className="more-label">
             Song ID:
-            <input type="text" name="id" onChange={this.handleChange}></input>
+            <input
+              className="more-input"
+              type="text"
+              name="id"
+              onChange={this.handleChange}
+            ></input>
           </label>
-          <label>
+          <label className="more-label">
             Song Title:
             <input
+              className="more-input"
               type="text"
               name="title"
               onChange={this.handleChange}
             ></input>
           </label>
-          <label>
+          <label className="more-label">
             Album:
             <input
+              className="more-input"
               type="text"
               name="album"
               onChange={this.handleChange}
             ></input>
           </label>
-          <label>
+          <label className="more-label">
             Artist:
             <input
+              className="more-input"
               type="text"
               name="artist"
               onChange={this.handleChange}
             ></input>
           </label>
-          <label>
+          <label className="more-label">
             Genre:
             <input
+              className="more-input"
               type="text"
               name="genre"
               onChange={this.handleChange}
             ></input>
           </label>
-          <label>
+          <label className="more-label">
             Release Date:
             <input
+              className="more-input"
               type="text"
               name="releaseDate"
               onChange={this.handleChange}
@@ -137,10 +157,15 @@ class MoreAction extends Component {
 
     if (action === "delete") {
       return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
+        <form className="more-form" onSubmit={this.handleSubmit}>
+          <label className="more-label">
             Enter Song ID
-            <input type="text" name="id" onChange={this.handleChange}></input>
+            <input
+              className="more-input"
+              type="text"
+              name="id"
+              onChange={this.handleChange}
+            ></input>
           </label>
           <input type="submit" value="submit"></input>
         </form>
