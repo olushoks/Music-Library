@@ -169,6 +169,8 @@ class MoreAction extends Component {
         properties[prop] = props[prop];
       }
     }
+    //GET SONG BY ID
+    /*
     if (action === "get") {
       axios
         .get(`http://localhost:5000/api/songs/get/${id}`)
@@ -181,6 +183,7 @@ class MoreAction extends Component {
         .catch(`Error!`);
       console.log(this.state);
     }
+    */
     if (action === "post") {
       axios
         .post(`http://localhost:5000/api/songs/add`, properties)
@@ -223,11 +226,6 @@ class MoreAction extends Component {
     return (
       <div>
         <ActionButton actionToPerform={this.actionToPerform} />
-        {/* <GenerateActionForm
-          action={this.state.action}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        /> */}
         {this.generateActionForm()}
       </div>
     );

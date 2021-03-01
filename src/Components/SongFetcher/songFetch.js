@@ -31,14 +31,13 @@ class GetAllSongs extends Component {
     // Capitalize the text in the filter selection
     headers[headers.indexOf("releaseDate")] = "Release Date";
     this.setState({ headers });
+    console.log(headers);
+    console.log(this.state.currentTable);
   }
 
   //Method to key object keys as TABLE HEADERS
   tableHeaders = () => {
     return this.state.headers.map((el) => {
-      // if (el === "releaseDate") {
-      //   el = "Release Date";
-      // }
       return (
         <th key={el} scope="col">
           {el}
@@ -50,6 +49,7 @@ class GetAllSongs extends Component {
   //Method to get TABLE BODY DATA
   tableBody = () => {
     const { currentTable } = this.state;
+
     return currentTable.map((el) => {
       return (
         <tr key={el.id} className="table-row">
@@ -79,10 +79,7 @@ class GetAllSongs extends Component {
     e.preventDefault();
     let filterText = e.target.value;
 
-    filterText =
-      typeof filterText === "number"
-        ? filterText.toString()
-        : filterText.toLowerCase();
+    filterText = filterText.toLowerCase();
     this.setState({
       filterText,
     });
@@ -104,9 +101,6 @@ class GetAllSongs extends Component {
 
     if (filterBy && filterText) {
       currentTable = songsData.filter((el) => {
-        if (String(el.id).includes(filterText)) {
-          return true;
-        }
         if (el[filterBy].toLowerCase().includes(filterText)) {
           return true;
         }
