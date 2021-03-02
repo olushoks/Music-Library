@@ -18,10 +18,16 @@ class MoreAction extends Component {
 
   // Get HTTP Request to perform and store in state
   actionToPerform = (e) => {
-    this.setState({ action: e.target.value });
-    this.setState({ properties: {}, form: "" });
+    this.setState({
+      action: e.target.value,
+      properties: {},
+      form: "",
+      responseMessage: "",
+    });
+    // this.setState({ properties: {}, form: "" });
   };
 
+  // Close Form
   closeForm = () => {
     this.setState({ form: "close-form" });
   };
