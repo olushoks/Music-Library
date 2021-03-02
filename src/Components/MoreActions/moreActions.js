@@ -10,6 +10,7 @@ class MoreAction extends Component {
     this.state = {
       action: "",
       properties: {},
+      errorMessage: "",
     };
   }
 
@@ -17,8 +18,9 @@ class MoreAction extends Component {
   actionToPerform = (e) => {
     this.setState({ action: e.target.value });
     this.setState({ properties: {} });
-    console.log(this.state);
   };
+
+  hideForm = () => {};
 
   // Condiitionally generate form based on action choosen by user
   generateActionForm = () => {
@@ -206,41 +208,43 @@ class MoreAction extends Component {
           console.log(res);
         })
         .catch(`Error!`);
-      console.log(this.state);
+      
     }
     */
     if (action === "post") {
       axios
         .post(`http://localhost:5000/api/songs/add`, properties)
         .then((res) => {
-          const response = res.data;
+          const response = res;
           console.log(response);
-          console.log(res);
+          console.log(response.statusText);
         })
-        .catch(`Error!`);
-      console.log(this.state);
+        .catch((err) => {
+          const errorMessage = `${err}: One or  more invalid input. Try Again!`;
+          console.log(errorMessage);
+          this.setState({ errorMessage });
+          console.log(this.state.errorMessage);
+        });
     }
     if (action === "put") {
       axios
         .put(`http://localhost:5000/api/songs/edit/${id}`, properties)
         .then((res) => {
-          // const response = res.data;
-          // console.log(response);
-          console.log(properties);
+          const response = res;
+          console.log(response);
+          console.log(response.statusText);
         })
         .catch(`Error!`);
-      console.log(this.state);
     }
     if (action === "delete") {
       axios
         .delete(`http://localhost:5000/api/songs/delete/${id}`)
         .then((res) => {
-          const response = res.data;
+          const response = res;
           console.log(response);
-          console.log(res);
+          console.log(response.statusText);
         })
         .catch(`Error!`);
-      console.log(this.state);
     }
     // CLEAR FORM
     props = {};

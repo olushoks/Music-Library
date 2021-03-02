@@ -31,8 +31,6 @@ class GetAllSongs extends Component {
     // Capitalize the text in the filter selection
     headers[headers.indexOf("releaseDate")] = "Release Date";
     this.setState({ headers });
-    console.log(headers);
-    console.log(this.state.currentTable);
   }
 
   //Method to key object keys as TABLE HEADERS
