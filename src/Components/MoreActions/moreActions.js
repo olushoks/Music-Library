@@ -19,7 +19,7 @@ class MoreAction extends Component {
   // Get HTTP Request to perform and store in state
   actionToPerform = (e) => {
     this.setState({ action: e.target.value });
-    this.setState({ properties: {} });
+    this.setState({ properties: {}, form: "" });
   };
 
   closeForm = () => {
@@ -104,7 +104,10 @@ class MoreAction extends Component {
           </p>
           <h4>
             Edit Song
-            <i className="fas fa-times-circle" onClick={this.closeForm}></i>
+            <i
+              className="close-form-button fas fa-times-circle"
+              onClick={this.closeForm}
+            ></i>
           </h4>
           <label className="more-label">
             Song ID
@@ -173,7 +176,10 @@ class MoreAction extends Component {
           </p>
           <h4>
             Delete Song
-            <i className="fas fa-times-circle" onClick={this.closeForm}></i>
+            <i
+              className="close-form-button fas fa-times-circle"
+              onClick={this.closeForm}
+            ></i>
           </h4>
           <label className="more-label">
             Enter Song ID
