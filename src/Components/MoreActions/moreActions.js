@@ -12,6 +12,7 @@ class MoreAction extends Component {
       properties: {},
       responseType: "",
       responseMessage: "",
+      form: "close-form",
     };
   }
 
@@ -21,7 +22,7 @@ class MoreAction extends Component {
     this.setState({ properties: {} });
   };
 
-  hideForm = () => {};
+  closeForm = () => {};
 
   // Condiitionally generate form based on action choosen by user
   generateActionForm = () => {
@@ -29,12 +30,16 @@ class MoreAction extends Component {
 
     if (action === "post") {
       return (
-        <form className="more-form" onSubmit={this.handleSubmit}>
+        <form className="more-form close-form" onSubmit={this.handleSubmit}>
           <p className={this.state.responseType}>
             {this.state.responseMessage}
           </p>
+          <h4>
+            Add Song<i className="close-form-button fas fa-times-circle"></i>
+          </h4>
+
           <label className="more-label">
-            Song Title:
+            Song Title
             <input
               className="more-input"
               type="text"
@@ -43,7 +48,7 @@ class MoreAction extends Component {
             ></input>
           </label>
           <label className="more-label">
-            Album:
+            Album
             <input
               className="more-input"
               type="text"
@@ -52,7 +57,7 @@ class MoreAction extends Component {
             ></input>
           </label>
           <label className="more-label">
-            Artist:
+            Artist
             <input
               className="more-input"
               type="text"
@@ -61,7 +66,7 @@ class MoreAction extends Component {
             ></input>
           </label>
           <label className="more-label">
-            Genre:
+            Genre
             <input
               className="more-input"
               type="text"
@@ -70,7 +75,7 @@ class MoreAction extends Component {
             ></input>
           </label>
           <label className="more-label">
-            Release Date:
+            Release Date
             <input
               className="more-input"
               type="text"
@@ -89,8 +94,11 @@ class MoreAction extends Component {
           <p className={this.state.responseType}>
             {this.state.responseMessage}
           </p>
+          <h4>
+            Edit Song<i className="fas fa-times-circle"></i>
+          </h4>
           <label className="more-label">
-            Song ID:
+            Song ID
             <input
               className="more-input"
               type="text"
@@ -99,7 +107,7 @@ class MoreAction extends Component {
             ></input>
           </label>
           <label className="more-label">
-            Song Title:
+            Song Title
             <input
               className="more-input"
               type="text"
@@ -108,7 +116,7 @@ class MoreAction extends Component {
             ></input>
           </label>
           <label className="more-label">
-            Album:
+            Album
             <input
               className="more-input"
               type="text"
@@ -117,7 +125,7 @@ class MoreAction extends Component {
             ></input>
           </label>
           <label className="more-label">
-            Artist:
+            Artist
             <input
               className="more-input"
               type="text"
@@ -126,7 +134,7 @@ class MoreAction extends Component {
             ></input>
           </label>
           <label className="more-label">
-            Genre:
+            Genre
             <input
               className="more-input"
               type="text"
@@ -135,7 +143,7 @@ class MoreAction extends Component {
             ></input>
           </label>
           <label className="more-label">
-            Release Date:
+            Release Date
             <input
               className="more-input"
               type="text"
@@ -154,6 +162,9 @@ class MoreAction extends Component {
           <p className={this.state.responseType}>
             {this.state.responseMessage}
           </p>
+          <h4>
+            Delete Song<i className="fas fa-times-circle"></i>
+          </h4>
           <label className="more-label">
             Enter Song ID
             <input

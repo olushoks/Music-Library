@@ -4,7 +4,6 @@
   height: auto;
   margin: 0 auto 5rem auto;
   width: 20rem;
-  /* padding: 0.5rem 0.3rem; */
   transform: translateY(10%);
   text-align: center;
   box-sizing: border-box;
@@ -16,8 +15,7 @@
 .more-label {
   font-weight: 900;
   text-decoration: none;
-  /* margin-right: 2rem;
-  padding-right: 2rem; */
+
   font-style: normal;
 }
 
@@ -54,4 +52,23 @@
   color: #df2b0b;
   font-weight: bold;
   font-style: italic;
+}
+
+form h4 {
+  text-align: center;
+}
+
+.close-form-button {
+  margin-left: 9rem;
+  font-size: 2rem;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* .show-form {
+  display: block;
+} */
+
+.close-form {
+  display: none;
 }
