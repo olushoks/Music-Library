@@ -10,6 +10,7 @@ class MoreAction extends Component {
     this.state = {
       action: "",
       properties: {},
+      responseType: "",
       responseMessage: "",
     };
   }
@@ -29,7 +30,9 @@ class MoreAction extends Component {
     if (action === "post") {
       return (
         <form className="more-form" onSubmit={this.handleSubmit}>
-          <p>{this.state.responseMessage}</p>
+          <p className={this.state.responseType}>
+            {this.state.responseMessage}
+          </p>
           <label className="more-label">
             Song Title:
             <input
@@ -83,7 +86,9 @@ class MoreAction extends Component {
     if (action === "put") {
       return (
         <form className="more-form" onSubmit={this.handleSubmit}>
-          <p>{this.state.responseMessage}</p>
+          <p className={this.state.responseType}>
+            {this.state.responseMessage}
+          </p>
           <label className="more-label">
             Song ID:
             <input
@@ -146,7 +151,9 @@ class MoreAction extends Component {
     if (action === "delete") {
       return (
         <form className="more-form" onSubmit={this.handleSubmit}>
-          <p>{this.state.responseMessage}</p>
+          <p className={this.state.responseType}>
+            {this.state.responseMessage}
+          </p>
           <label className="more-label">
             Enter Song ID
             <input
@@ -189,10 +196,12 @@ class MoreAction extends Component {
         .post(`http://localhost:5000/api/songs/add`, properties)
         .then((res) => {
           const responseMessage = `Song has been succesfully added to database`;
+          this.setState({ responseType: `success` });
           this.setState({ responseMessage });
         })
         .catch(() => {
           const responseMessage = `One or  more invalid input. Try Again!`;
+          this.setState({ responseType: `error` });
           this.setState({ responseMessage });
         });
     }
@@ -201,10 +210,12 @@ class MoreAction extends Component {
         .put(`http://localhost:5000/api/songs/edit/${id}`, properties)
         .then((res) => {
           const responseMessage = `Song has been succesfully edited`;
+          this.setState({ responseType: `success` });
           this.setState({ responseMessage });
         })
         .catch(() => {
           const responseMessage = `One or  more invalid input. Try Again!`;
+          this.setState({ responseType: `error` });
           this.setState({ responseMessage });
         });
     }
@@ -213,10 +224,12 @@ class MoreAction extends Component {
         .delete(`http://localhost:5000/api/songs/delete/${id}`)
         .then((res) => {
           const responseMessage = `Song has been succesfully deleted from the database`;
+          this.setState({ responseType: `success` });
           this.setState({ responseMessage });
         })
         .catch(() => {
           const responseMessage = `Invalid input. Try Again!`;
+          this.setState({ responseType: `error` });
           this.setState({ responseMessage });
         });
     }

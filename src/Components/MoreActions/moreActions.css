@@ -43,3 +43,15 @@
   width: 8rem;
   font-size: 0.9rem;
 }
+
+.success {
+  color: #0de41f;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.error {
+  color: #df2b0b;
+  font-weight: bold;
+  font-style: italic;
+}
