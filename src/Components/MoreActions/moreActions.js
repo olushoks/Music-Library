@@ -212,6 +212,7 @@ class MoreAction extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    e.target.reset();
     const { id } = this.state.properties;
     let props = this.state.properties;
     const action = this.state.action;
