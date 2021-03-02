@@ -23,13 +23,13 @@ class MoreAction extends Component {
   };
 
   closeForm = () => {
-    alert(`I want to Close the form!`);
     this.setState({ form: "close-form" });
   };
 
   // Condiitionally generate form based on action choosen by user
   generateActionForm = () => {
     let { action, form } = this.state;
+    // String to hold dynamic styles for form
     const formStyle = `more-form ${form}`;
 
     if (action === "post") {
@@ -98,12 +98,13 @@ class MoreAction extends Component {
 
     if (action === "put") {
       return (
-        <form className="more-form" onSubmit={this.handleSubmit}>
+        <form className={formStyle} onSubmit={this.handleSubmit}>
           <p className={this.state.responseType}>
             {this.state.responseMessage}
           </p>
           <h4>
-            Edit Song<i className="fas fa-times-circle"></i>
+            Edit Song
+            <i className="fas fa-times-circle" onClick={this.closeForm}></i>
           </h4>
           <label className="more-label">
             Song ID
@@ -166,12 +167,13 @@ class MoreAction extends Component {
 
     if (action === "delete") {
       return (
-        <form className="more-form" onSubmit={this.handleSubmit}>
+        <form className={formStyle} onSubmit={this.handleSubmit}>
           <p className={this.state.responseType}>
             {this.state.responseMessage}
           </p>
           <h4>
-            Delete Song<i className="fas fa-times-circle"></i>
+            Delete Song
+            <i className="fas fa-times-circle" onClick={this.closeForm}></i>
           </h4>
           <label className="more-label">
             Enter Song ID
