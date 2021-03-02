@@ -23,8 +23,8 @@ class GetAllSongs extends Component {
       .then((response) => {
         const songsData = response.data;
         this.setState({ songsData, currentTable: songsData });
-      })
-      .catch(console.log("Loading"));
+      });
+    // .catch(alert("Unable to access the Songs Library at this time!"));
 
     // Get keys to use as table headers and filter options
     const headers = Object.keys(this.state.songsData[0]);
@@ -69,7 +69,6 @@ class GetAllSongs extends Component {
     this.setState({
       filterBy,
     });
-    console.log(this.state);
   };
 
   // Handle change in Filter Text
@@ -81,7 +80,6 @@ class GetAllSongs extends Component {
     this.setState({
       filterText,
     });
-    console.log(this.state);
   };
 
   // Filter Button Click
@@ -111,7 +109,7 @@ class GetAllSongs extends Component {
   };
 
   clearFilter = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     let { filterBy, filterText, currentTable, songsData } = this.state;
     currentTable = songsData;
     filterBy = "";
@@ -136,9 +134,7 @@ class GetAllSongs extends Component {
         </table>
       </div>
     ) : (
-      <div className="no-result">
-        Unable to access the Songs Library at this time!
-      </div>
+      <div className="no-result">No Song in the library at this time</div>
     );
   };
 

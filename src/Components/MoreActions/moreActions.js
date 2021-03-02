@@ -12,7 +12,7 @@ class MoreAction extends Component {
       properties: {},
       responseType: "",
       responseMessage: "",
-      form: "close-form",
+      form: "",
     };
   }
 
@@ -22,20 +22,28 @@ class MoreAction extends Component {
     this.setState({ properties: {} });
   };
 
-  closeForm = () => {};
+  closeForm = () => {
+    alert(`I want to Close the form!`);
+    this.setState({ form: "close-form" });
+  };
 
   // Condiitionally generate form based on action choosen by user
   generateActionForm = () => {
-    let { action } = this.state;
+    let { action, form } = this.state;
+    const formStyle = `more-form ${form}`;
 
     if (action === "post") {
       return (
-        <form className="more-form close-form" onSubmit={this.handleSubmit}>
+        <form className={formStyle} onSubmit={this.handleSubmit}>
           <p className={this.state.responseType}>
             {this.state.responseMessage}
           </p>
           <h4>
-            Add Song<i className="close-form-button fas fa-times-circle"></i>
+            Add Song
+            <i
+              className="close-form-button fas fa-times-circle"
+              onClick={this.closeForm}
+            ></i>
           </h4>
 
           <label className="more-label">
