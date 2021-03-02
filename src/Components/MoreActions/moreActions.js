@@ -10,7 +10,7 @@ class MoreAction extends Component {
     this.state = {
       action: "",
       properties: {},
-      errorMessage: "",
+      responseMessage: "",
     };
   }
 
@@ -25,26 +25,11 @@ class MoreAction extends Component {
   // Condiitionally generate form based on action choosen by user
   generateActionForm = () => {
     let { action } = this.state;
-    if (action === "get") {
-      return (
-        <form className="more-form" onSubmit={this.handleSubmit}>
-          <label className="more-label">
-            Enter Song ID:
-            <input
-              className="more-input"
-              type="text"
-              name="id"
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <input className="submit" type="submit" value="submit"></input>
-        </form>
-      );
-    }
 
     if (action === "post") {
       return (
         <form className="more-form" onSubmit={this.handleSubmit}>
+          <p>{this.state.responseMessage}</p>
           <label className="more-label">
             Song Title:
             <input
@@ -98,6 +83,7 @@ class MoreAction extends Component {
     if (action === "put") {
       return (
         <form className="more-form" onSubmit={this.handleSubmit}>
+          <p>{this.state.responseMessage}</p>
           <label className="more-label">
             Song ID:
             <input
@@ -160,6 +146,7 @@ class MoreAction extends Component {
     if (action === "delete") {
       return (
         <form className="more-form" onSubmit={this.handleSubmit}>
+          <p>{this.state.responseMessage}</p>
           <label className="more-label">
             Enter Song ID
             <input
@@ -196,55 +183,42 @@ class MoreAction extends Component {
         properties[prop] = props[prop];
       }
     }
-    //GET SONG BY ID
-    /*
-    if (action === "get") {
-      axios
-        .get(`http://localhost:5000/api/songs/get/${id}`)
-        .then((res) => {
-          const response = res.data;
-          props.currentTable = response;
-          console.log(response);
-          console.log(res);
-        })
-        .catch(`Error!`);
-      
-    }
-    */
+
     if (action === "post") {
       axios
         .post(`http://localhost:5000/api/songs/add`, properties)
         .then((res) => {
-          const response = res;
-          console.log(response);
-          console.log(response.statusText);
+          const responseMessage = `Song has been succesfully added to database`;
+          this.setState({ responseMessage });
         })
-        .catch((err) => {
-          const errorMessage = `${err}: One or  more invalid input. Try Again!`;
-          console.log(errorMessage);
-          this.setState({ errorMessage });
-          console.log(this.state.errorMessage);
+        .catch(() => {
+          const responseMessage = `One or  more invalid input. Try Again!`;
+          this.setState({ responseMessage });
         });
     }
     if (action === "put") {
       axios
         .put(`http://localhost:5000/api/songs/edit/${id}`, properties)
         .then((res) => {
-          const response = res;
-          console.log(response);
-          console.log(response.statusText);
+          const responseMessage = `Song has been succesfully edited`;
+          this.setState({ responseMessage });
         })
-        .catch(`Error!`);
+        .catch(() => {
+          const responseMessage = `One or  more invalid input. Try Again!`;
+          this.setState({ responseMessage });
+        });
     }
     if (action === "delete") {
       axios
         .delete(`http://localhost:5000/api/songs/delete/${id}`)
         .then((res) => {
-          const response = res;
-          console.log(response);
-          console.log(response.statusText);
+          const responseMessage = `Song has been succesfully deleted from the database`;
+          this.setState({ responseMessage });
         })
-        .catch(`Error!`);
+        .catch(() => {
+          const responseMessage = `Invalid input. Try Again!`;
+          this.setState({ responseMessage });
+        });
     }
     // CLEAR FORM
     props = {};
