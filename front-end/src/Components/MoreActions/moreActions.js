@@ -17,6 +17,9 @@ const MoreAction = ({ action }) => {
     e.target.reset();
   };
 
+  const closeForm = () => {
+    setIsFormOpen(false);
+  };
   // Get all properties in states property object except ID
   // const properties = {};
   // for (let prop in props) {
@@ -56,9 +59,11 @@ const MoreAction = ({ action }) => {
 
   // CLEAR FORM
 
-  if (action === "add") {
+  if (action === "edit") {
     return <AddSong />;
   }
+
+  return <p>What!!</p>;
 };
 
 export default MoreAction;

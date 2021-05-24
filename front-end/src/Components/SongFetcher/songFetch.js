@@ -1,40 +1,59 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Filter from "../SongFilter/songFilter";
 import MoreAction from "../MoreActions/moreActions";
 import "./songFetch.css";
 import axios from "axios";
 
-class GetAllSongs extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      songsData: [],
-      headers: [],
-      currentTable: [],
-      filterBy: "",
-      filterText: "",
-      action: "",
-    };
-  }
+const GetAllSongs = () => {
+  const [songsData, setSongsData] = useState([]);
+  const [currentTable, setCurrentTable] = useState([]);
+  const [filterBy, setFilterBy] = useState("");
+  const [filterText, setFilterText] = useState("");
+  const [action, setAction] = useState("");
+  const [headers, setHeaders] = useState([]);
 
-  async componentDidMount() {
+  const fetch = async () => {
     await axios
       // .get("http://www.devcodecampmusiclibrary.com/api/music")
       .get("http://localhost:5000/api/songs/get")
-      .then((response) => {
-        const songsData = response.data;
-        this.setState({ songsData, currentTable: songsData });
+      .then(({ data }) => {
+        setSongsData(data);
+        setCurrentTable(data);
       });
+  };
 
-    // Get keys to use as table headers and filter options
-    const headers = Object.keys(this.state.songsData[0]);
-    // Capitalize the text in the filter selection
-    headers[headers.indexOf("releaseDate")] = "Release Date";
-    this.setState({ headers });
-  }
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  // Get keys to use as table headers and filter options
+  // const headers = Object.keys(songsData[0]);
+  // Capitalize the text in the filter selection
+  headers[headers.indexOf("releaseDate")] = "Release Date";
+  setHeaders(headers);
+
+  // DELETE SONG
+  const deleteSong = (id) => {
+    //REMOVE FROM UII
+    const newSongsTable = this.state.currentTable.filter(
+      (song) => song.id !== id
+    );
+    this.setState({ currentTable: newSongsTable });
+
+    //REMOVE FROM DB
+    axios.delete(`http://localhost:5000/api/songs/delete/${id}`).then((res) => {
+      this.setState({ songsData: res.data });
+    });
+  };
+
+  //EDIT SONG
+  const editSong = (song) => {
+    this.setState({ action: "edit" });
+    console.log(song);
+  };
 
   //Method to key object keys as TABLE HEADERS
-  tableHeaders = () => {
+  const tableHeaders = () => {
     const headers = this.state.headers.map((el) => {
       return (
         <th key={el} scope="col">
@@ -50,28 +69,8 @@ class GetAllSongs extends Component {
     );
   };
 
-  // DELETE SONG
-  deleteSong = (id) => {
-    //REMOVE FROM UII
-    const newSongsTable = this.state.currentTable.filter(
-      (song) => song.id !== id
-    );
-    this.setState({ currentTable: newSongsTable });
-
-    //REMOVE FROM DB
-    axios.delete(`http://localhost:5000/api/songs/delete/${id}`).then((res) => {
-      this.setState({ songsData: res.data });
-    });
-  };
-
-  //EDIT SONG
-  editSong = (song) => {
-    this.setState({ action: "edit" });
-    console.log(song);
-  };
-
   //Method to get TABLE BODY DATA
-  tableBody = () => {
+  const tableBody = () => {
     const { currentTable } = this.state;
 
     return currentTable.map((el) => {
@@ -85,8 +84,8 @@ class GetAllSongs extends Component {
             <td>{el.genre}</td>
             <td>{el.releaseDate}</td>
             <td>
-              <button onClick={() => this.editSong(el)}>edit</button>
-              <button onClick={() => this.deleteSong(el.id)}>delete</button>
+              <button onClick={() => editSong(el)}>edit</button>
+              <button onClick={() => deleteSong(el.id)}>delete</button>
             </td>
           </tr>
         </>
@@ -95,7 +94,7 @@ class GetAllSongs extends Component {
   };
 
   // Handle change in Filter Criteria
-  handleChangeFilterCriteria = (e) => {
+  const handleChangeFilterCriteria = (e) => {
     e.preventDefault();
     const filterBy = e.target.value;
     this.setState({
@@ -104,7 +103,7 @@ class GetAllSongs extends Component {
   };
 
   // Handle change in Filter Text
-  handleChangeFilterText = (e) => {
+  const handleChangeFilterText = (e) => {
     e.preventDefault();
     let filterText = e.target.value;
 
@@ -115,7 +114,7 @@ class GetAllSongs extends Component {
   };
 
   // Filter Button Click
-  filterTable = (e) => {
+  const filterTable = (e) => {
     e.preventDefault();
     let { filterBy, filterText, currentTable, songsData } = this.state;
     filterBy = filterBy === "Release Date" ? "releaseDate" : filterBy;
@@ -140,7 +139,7 @@ class GetAllSongs extends Component {
     });
   };
 
-  clearFilter = (e) => {
+  const clearFilter = (e) => {
     e.preventDefault();
     let { filterBy, filterText, currentTable, songsData } = this.state;
     currentTable = songsData;
@@ -155,7 +154,7 @@ class GetAllSongs extends Component {
   };
 
   // Function to call to render table
-  renderTable = () => {
+  const renderTable = () => {
     return this.state.songsData.length > 0 ? (
       <div>
         <table className="table table-block table-hover">
@@ -170,21 +169,24 @@ class GetAllSongs extends Component {
     );
   };
 
-  render() {
-    return (
-      <div>
-        {this.state.action && <MoreAction action={this.state.action} />}
-        <Filter
-          selectOptions={this.state.headers}
-          onFilterChange={this.handleChangeFilterCriteria}
-          onTextChange={this.handleChangeFilterText}
-          filter={this.filterTable}
-          clearFilter={this.clearFilter}
-        />
-        {this.renderTable()}
-      </div>
-    );
+  if (!songsData || songsData.length === 0) {
+    return <h3>No Songs</h3>;
   }
-}
+
+  return (
+    <div>
+      Hello
+      {/* {this.state.action && <MoreAction action={this.state.action} />}
+      <Filter
+        selectOptions={this.state.headers}
+        onFilterChange={this.handleChangeFilterCriteria}
+        onTextChange={this.handleChangeFilterText}
+        filter={this.filterTable}
+        clearFilter={this.clearFilter}
+      />
+      {this.renderTable()} */}
+    </div>
+  );
+};
 
 export default GetAllSongs;
