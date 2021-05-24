@@ -51,10 +51,16 @@ class GetAllSongs extends Component {
 
   // DELETE SONG
   deleteSong = (id) => {
+    //REMOVE FROM UII
     const newSongsTable = this.state.currentTable.filter(
       (song) => song.id !== id
     );
     this.setState({ currentTable: newSongsTable });
+
+    //REMOVE FROM DB
+    axios.delete(`http://localhost:5000/api/songs/delete/${id}`).then((res) => {
+      this.setState({ songsData: res.data });
+    });
   };
 
   //Method to get TABLE BODY DATA

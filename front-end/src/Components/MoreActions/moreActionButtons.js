@@ -5,9 +5,6 @@ import "./moreActionButtons.css";
 function ActionButtons(props) {
   return (
     <div className="button-center">
-      {/* <button className="button" value="get" onClick={props.actionToPerform}>
-        Get Song By ID
-      </button> */}
       <button className="button" value="post" onClick={props.actionToPerform}>
         Add New Song
       </button>
