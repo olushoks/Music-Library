@@ -24,7 +24,6 @@ class GetAllSongs extends Component {
         const songsData = response.data;
         this.setState({ songsData, currentTable: songsData });
       });
-    // .catch(alert("Unable to access the Songs Library at this time!"));
 
     // Get keys to use as table headers and filter options
     const headers = Object.keys(this.state.songsData[0]);
@@ -35,13 +34,19 @@ class GetAllSongs extends Component {
 
   //Method to key object keys as TABLE HEADERS
   tableHeaders = () => {
-    return this.state.headers.map((el) => {
+    const headers = this.state.headers.map((el) => {
       return (
         <th key={el} scope="col">
           {el}
         </th>
       );
     });
+    return (
+      <>
+        {headers}
+        <th>MODIFY</th>
+      </>
+    );
   };
 
   //Method to get TABLE BODY DATA
@@ -50,14 +55,18 @@ class GetAllSongs extends Component {
 
     return currentTable.map((el) => {
       return (
-        <tr key={el.id} className="table-row">
-          <td>{el.id}</td>
-          <td>{el.title}</td>
-          <td>{el.album}</td>
-          <td>{el.artist}</td>
-          <td>{el.genre}</td>
-          <td>{el.releaseDate}</td>
-        </tr>
+        <>
+          <tr key={el.id} className="table-row">
+            <td>{el.id}</td>
+            <td>{el.title}</td>
+            <td>{el.album}</td>
+            <td>{el.artist}</td>
+            <td>{el.genre}</td>
+            <td>{el.releaseDate}</td>
+            <button>edit</button>
+            <button>delete</button>
+          </tr>
+        </>
       );
     });
   };
