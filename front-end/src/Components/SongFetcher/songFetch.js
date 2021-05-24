@@ -49,6 +49,14 @@ class GetAllSongs extends Component {
     );
   };
 
+  // DELETE SONG
+  deleteSong = (id) => {
+    const newSongsTable = this.state.currentTable.filter(
+      (song) => song.id !== id
+    );
+    this.setState({ currentTable: newSongsTable });
+  };
+
   //Method to get TABLE BODY DATA
   tableBody = () => {
     const { currentTable } = this.state;
@@ -64,7 +72,7 @@ class GetAllSongs extends Component {
             <td>{el.genre}</td>
             <td>{el.releaseDate}</td>
             <button>edit</button>
-            <button>delete</button>
+            <button onClick={() => this.deleteSong(el.id)}>delete</button>
           </tr>
         </>
       );
