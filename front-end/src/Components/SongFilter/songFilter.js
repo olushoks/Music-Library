@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./songFilter.css";
 
-function Filter(props) {
+const Filter = ({ selectOptions }) => {
+  const [filterCriteria, setFilterCriteria] = useState("");
+  const [filterText, setFilterText] = useState("");
+
+  if (!selectOptions) return null;
+
   return (
     <div className="container-fluid">
       <form className="form">
@@ -12,10 +17,11 @@ function Filter(props) {
           className="select"
           name="filterCriteria"
           id="filterCriteria"
-          onChange={props.onFilterChange}
+          value={filterCriteria}
+          onChange={(e) => setFilterCriteria(e.target.value)}
           required
         >
-          {props.selectOptions.map((option) => {
+          {Object.keys(selectOptions).map((option) => {
             if (option === "id") {
               return <option key="" defaultValue=""></option>;
             }
@@ -29,18 +35,20 @@ function Filter(props) {
         <input
           className="input"
           type="text"
+          name="filterText"
+          value={filterText}
           placeholder="enter text to filter by"
-          onChange={props.onTextChange}
+          onChange={(e) => setFilterText(e.target.value)}
         ></input>
-        <button className="button" onClick={props.filter}>
+        <button className="button" onClick={() => console.log("Filter")}>
           Filter
         </button>
-        <button className="button" onClick={props.clearFilter}>
+        <button className="button" onClick={() => console.log(" Clear Filter")}>
           Clear Filter
         </button>
       </form>
     </div>
   );
-}
+};
 
 export default Filter;

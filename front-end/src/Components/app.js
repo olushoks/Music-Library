@@ -40,13 +40,7 @@ function App() {
     <div>
       <LandingPage />
       {/* <MoreAction /> */}
-      {/* <FilterSongs
-        selectOptions={headers}
-        onFilterChange={handleChangeFilterCriteria}
-        onTextChange={handleChangeFilterText}
-        filter={filterTable}
-        clearFilter={clearFilter}
-      /> */}
+      <FilterSongs selectOptions={songsData[0]} />
       <DisplaySongs songsData={songsData} deleteSong={deleteSong} />
     </div>
   );
