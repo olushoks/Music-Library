@@ -11,9 +11,6 @@ function ActionButtons(props) {
       <button className="button" value="put" onClick={props.actionToPerform}>
         Edit Song
       </button>
-      <button className="button" value="delete" onClick={props.actionToPerform}>
-        Delete Song
-      </button>
     </div>
   );
 }

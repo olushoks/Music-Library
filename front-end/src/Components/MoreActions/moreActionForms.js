@@ -15,10 +15,6 @@ function GenerateActionForm(props) {
     return <EditSong />;
     // EditSong();
   }
-  if (action === "delete") {
-    return <DeleteSong />;
-    // DeleteSong();
-  }
 }
 
 function GetSongByID(props) {
@@ -95,18 +91,6 @@ function EditSong(props) {
           name="releaseDate"
           onChange={props.handleChange}
         ></input>
-      </label>
-      <input type="submit" value="submit"></input>
-    </form>
-  );
-}
-
-function DeleteSong(props) {
-  return (
-    <form onSubmit={props.handleSubmit}>
-      <label>
-        Enter Song ID
-        <input type="text" name="id" onChange={props.handleChange}></input>
       </label>
       <input type="submit" value="submit"></input>
     </form>
