@@ -13,6 +13,7 @@ class GetAllSongs extends Component {
       currentTable: [],
       filterBy: "",
       filterText: "",
+      action: "",
     };
   }
 
@@ -63,6 +64,12 @@ class GetAllSongs extends Component {
     });
   };
 
+  //EDIT SONG
+  editSong = (song) => {
+    this.setState({ action: "edit" });
+    console.log(song);
+  };
+
   //Method to get TABLE BODY DATA
   tableBody = () => {
     const { currentTable } = this.state;
@@ -77,8 +84,10 @@ class GetAllSongs extends Component {
             <td>{el.artist}</td>
             <td>{el.genre}</td>
             <td>{el.releaseDate}</td>
-            <button>edit</button>
-            <button onClick={() => this.deleteSong(el.id)}>delete</button>
+            <td>
+              <button onClick={() => this.editSong(el)}>edit</button>
+              <button onClick={() => this.deleteSong(el.id)}>delete</button>
+            </td>
           </tr>
         </>
       );
@@ -164,7 +173,7 @@ class GetAllSongs extends Component {
   render() {
     return (
       <div>
-        <MoreAction currentTable={this.state.currentTable} />
+        {this.state.action && <MoreAction action={this.state.action} />}
         <Filter
           selectOptions={this.state.headers}
           onFilterChange={this.handleChangeFilterCriteria}

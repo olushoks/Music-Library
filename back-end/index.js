@@ -49,7 +49,6 @@ app.delete("/api/songs/delete/:id", (req, res) => {
   const id = req.params.id;
   const songToDelete = req.body;
   repoContext.songs.deleteSong(id, songToDelete);
-  // const deletedSong = repoContext.songs.deleteSong(id, songToDelete);
   const songs = repoContext.songs.findAllSongs();
   res.send(songs);
 });
