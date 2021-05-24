@@ -4,7 +4,7 @@ import MoreAction from "../MoreActions/moreActions";
 import "./DisplaySongs.css";
 import axios from "axios";
 
-const DisplaySongs = ({ songsData }) => {
+const DisplaySongs = ({ songsData, deleteSong }) => {
   // const [currentTable, setCurrentTable] = useState([]);
   // const [filterBy, setFilterBy] = useState("");
   // const [filterText, setFilterText] = useState("");
@@ -38,47 +38,6 @@ const DisplaySongs = ({ songsData }) => {
   // Capitalize the text in the filter selection
   // headers[headers.indexOf("releaseDate")] = "Release Date";
   // setHeaders(headers);
-
-  //Method to key object keys as TABLE HEADERS
-  // const tableHeaders = () => {
-  //   const headers = this.state.headers.map((el) => {
-  //     return (
-  //       <th key={el} scope="col">
-  //         {el}
-  //       </th>
-  //     );
-  //   });
-  //   return (
-  //     <>
-  //       {headers}
-  //       <th>MODIFY</th>
-  //     </>
-  //   );
-  // };
-
-  // //Method to get TABLE BODY DATA
-  // const tableBody = () => {
-  //   const { currentTable } = this.state;
-
-  //   return currentTable.map((el) => {
-  //     return (
-  //       <>
-  //         <tr key={el.id} className="table-row">
-  //           <td>{el.id}</td>
-  //           <td>{el.title}</td>
-  //           <td>{el.album}</td>
-  //           <td>{el.artist}</td>
-  //           <td>{el.genre}</td>
-  //           <td>{el.releaseDate}</td>
-  //           <td>
-  //             <button onClick={() => editSong(el)}>edit</button>
-  //             <button onClick={() => deleteSong(el.id)}>delete</button>
-  //           </td>
-  //         </tr>
-  //       </>
-  //     );
-  //   });
-  // };
 
   // Handle change in Filter Criteria
   // const handleChangeFilterCriteria = (e) => {
@@ -140,22 +99,6 @@ const DisplaySongs = ({ songsData }) => {
   //   });
   // };
 
-  // Function to call to render table
-  // const renderTable = () => {
-  //   return this.state.songsData.length > 0 ? (
-  //     <div>
-  //       <table className="table table-block table-hover">
-  //         <thead className="table-header">
-  //           <tr>{this.tableHeaders()}</tr>
-  //         </thead>
-  //         <tbody>{this.tableBody()}</tbody>
-  //       </table>
-  //     </div>
-  //   ) : (
-  //     <div className="no-result">No Song in the library at this time</div>
-  //   );
-  // };
-
   if (!songsData || songsData.length === 0) {
     return <h3>No Songs</h3>;
   }
@@ -190,8 +133,8 @@ const DisplaySongs = ({ songsData }) => {
                 <td>
                   <button onClick={() => console.log("Edit")}>edit</button>
                   {/* <button onClick={() => editSong(song)}>edit</button> */}
-                  <button onClick={() => console.log("delete")}>delete</button>
-                  {/* <button onClick={() => deleteSong(song.id)}>delete</button> */}
+
+                  <button onClick={() => deleteSong(song.id)}>delete</button>
                 </td>
               </tr>
             );

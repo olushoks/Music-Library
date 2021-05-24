@@ -8,10 +8,25 @@ import FilterSongs from "./SongFilter/songFilter";
 function App() {
   const [songsData, setSongsData] = useState([]);
 
+  // FETCH SONG FROM API
   const fetch = async () => {
     await axios
       // .get("http://www.devcodecampmusiclibrary.com/api/music")
       .get("http://localhost:5000/api/songs/get")
+      .then(({ data }) => {
+        setSongsData(data);
+      });
+  };
+
+  // DELETE SONG
+  const deleteSong = (id) => {
+    //REMOVE FROM UII
+    const newSongsTable = songsData.filter((song) => song.id !== id);
+    setSongsData(newSongsTable);
+
+    // //REMOVE FROM DB
+    axios
+      .delete(`http://localhost:5000/api/songs/delete/${id}`)
       .then(({ data }) => {
         setSongsData(data);
       });
@@ -32,7 +47,7 @@ function App() {
         filter={filterTable}
         clearFilter={clearFilter}
       /> */}
-      <DisplaySongs songsData={songsData} />
+      <DisplaySongs songsData={songsData} deleteSong={deleteSong} />
     </div>
   );
 }
