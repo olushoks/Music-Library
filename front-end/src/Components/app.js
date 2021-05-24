@@ -14,7 +14,6 @@ function App() {
       .get("http://localhost:5000/api/songs/get")
       .then(({ data }) => {
         setSongsData(data);
-        // setCurrentTable(data);
       });
   };
 

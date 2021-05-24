@@ -167,6 +167,7 @@ const DisplaySongs = ({ songsData }) => {
           <tr>
             {Object.keys(songsData[0]).map((el) => {
               el = el === "releaseDate" ? "Release Date" : el;
+              el = el === "id" ? "" : el;
               return (
                 <th key={el} scope="col">
                   {el}
@@ -177,10 +178,10 @@ const DisplaySongs = ({ songsData }) => {
           </tr>
         </thead>
         <tbody>
-          {songsData.map((song) => {
+          {songsData.map((song, index) => {
             return (
               <tr key={song.id} className="table-row">
-                <td>{song.id}</td>
+                <td>{index + 1}</td>
                 <td>{song.title}</td>
                 <td>{song.album}</td>
                 <td>{song.artist}</td>
