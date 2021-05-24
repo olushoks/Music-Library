@@ -7,6 +7,7 @@ import FilterSongs from "./SongFilter/songFilter";
 
 function App() {
   const [songsData, setSongsData] = useState([]);
+  const [filteredTable, setFilteredTable] = useState([]);
 
   // FETCH SONG FROM API
   const fetch = async () => {
@@ -32,6 +33,30 @@ function App() {
       });
   };
 
+  // // Filter Button Click
+  const filterTable = (filterCriteria, filterText) => {
+    // e.preventDefault();
+
+    filterCriteria =
+      filterCriteria === "Release Date" ? "releaseDate" : filterCriteria;
+
+    if (filterCriteria === undefined) {
+      console.log("Choose an option to filter by!");
+    }
+    if (filterText === undefined) {
+      console.log("Enter some text!");
+    }
+
+    if (filterCriteria && filterText) {
+      setFilteredTable((currentSongsTable) => {
+        const updatedSongsTable = currentSongsTable.filter((song) =>
+          song[filterCriteria].includes(filterText)
+        );
+        return updatedSongsTable;
+      });
+    }
+  };
+
   useEffect(() => {
     fetch();
   }, []);
@@ -40,7 +65,7 @@ function App() {
     <div>
       <LandingPage />
       {/* <MoreAction /> */}
-      <FilterSongs selectOptions={songsData[0]} />
+      <FilterSongs selectOptions={songsData[0]} filterTable={filterTable} />
       <DisplaySongs songsData={songsData} deleteSong={deleteSong} />
     </div>
   );

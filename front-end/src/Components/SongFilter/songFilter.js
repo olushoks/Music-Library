@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import "./songFilter.css";
 
-const Filter = ({ selectOptions }) => {
+const Filter = ({ selectOptions, filterTable }) => {
   const [filterCriteria, setFilterCriteria] = useState("");
   const [filterText, setFilterText] = useState("");
 
   if (!selectOptions) return null;
+
+  const handleFilter = (e) => {
+    e.preventDefault();
+    filterTable(filterCriteria, filterText);
+  };
 
   return (
     <div className="container-fluid">
@@ -22,14 +27,16 @@ const Filter = ({ selectOptions }) => {
           required
         >
           {Object.keys(selectOptions).map((option) => {
-            if (option === "id") {
-              return <option key="" defaultValue=""></option>;
-            }
-            return (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            );
+            option = option === "releaseDate" ? "Release Date" : option;
+            option =
+              option === "id" ? (
+                <option key="" defaultValue=""></option>
+              ) : (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              );
+            return option;
           })}
         </select>
         <input
@@ -40,7 +47,7 @@ const Filter = ({ selectOptions }) => {
           placeholder="enter text to filter by"
           onChange={(e) => setFilterText(e.target.value)}
         ></input>
-        <button className="button" onClick={() => console.log("Filter")}>
+        <button className="button" onClick={handleFilter}>
           Filter
         </button>
         <button className="button" onClick={() => console.log(" Clear Filter")}>
