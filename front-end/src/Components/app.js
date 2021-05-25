@@ -7,7 +7,9 @@ import FilterSongs from "./SongFilter/songFilter";
 
 function App() {
   const [songsData, setSongsData] = useState([]);
-  const [filteredTable, setFilteredTable] = useState([]);
+  const [currentlyDisplayed, setCurrentlyDisplayed] = useState([]);
+  const [alert, setAlert] = useState("");
+  // const [filteredTable, setFilteredTable] = useState([]);
 
   // FETCH SONG FROM API
   const fetch = async () => {
@@ -16,8 +18,40 @@ function App() {
       .get("http://localhost:5000/api/songs/get")
       .then(({ data }) => {
         setSongsData(data);
+        setCurrentlyDisplayed(data);
       });
   };
+
+  // CALL FETCH ON INITIAL RENDER
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  // CHECK IF SONGSDATA IS EMPTY AND DISPLAY INFO TO USER
+  useEffect(() => {
+    if (songsData.length === 0) {
+      setAlert("No Songs in the Library at this time");
+    }
+
+    let clearInfo = setTimeout(() => {
+      setAlert("");
+    }, 3000);
+
+    return () => clearTimeout(clearInfo);
+  }, [songsData]);
+
+  // CHECK IF FILTER RETURNS NO RESULT AND DISPLAY INFO TO USER
+  useEffect(() => {
+    if (currentlyDisplayed.length === 0) {
+      setAlert("No Matching result. Please refine your search");
+    }
+
+    let clearInfo = setTimeout(() => {
+      setAlert("");
+    }, 3000);
+
+    return () => clearTimeout(clearInfo);
+  }, [currentlyDisplayed]);
 
   // DELETE SONG
   const deleteSong = (id) => {
@@ -48,7 +82,7 @@ function App() {
     }
 
     if (filterCriteria && filterText) {
-      setFilteredTable((currentSongsTable) => {
+      setCurrentlyDisplayed((currentSongsTable) => {
         const updatedSongsTable = currentSongsTable.filter((song) =>
           song[filterCriteria].includes(filterText)
         );
@@ -57,16 +91,16 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    fetch();
-  }, []);
-
   return (
     <div>
       <LandingPage />
       {/* <MoreAction /> */}
       <FilterSongs selectOptions={songsData[0]} filterTable={filterTable} />
-      <DisplaySongs songsData={songsData} deleteSong={deleteSong} />
+      <DisplaySongs
+        songsData={currentlyDisplayed}
+        deleteSong={deleteSong}
+        alert={alert}
+      />
     </div>
   );
 }

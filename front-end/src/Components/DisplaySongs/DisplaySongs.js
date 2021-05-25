@@ -4,7 +4,7 @@ import MoreAction from "../MoreActions/moreActions";
 import "./DisplaySongs.css";
 import axios from "axios";
 
-const DisplaySongs = ({ songsData, deleteSong }) => {
+const DisplaySongs = ({ songsData, deleteSong, alert }) => {
   // const [currentTable, setCurrentTable] = useState([]);
   // const [filterBy, setFilterBy] = useState("");
   // const [filterText, setFilterText] = useState("");
@@ -100,7 +100,7 @@ const DisplaySongs = ({ songsData, deleteSong }) => {
   // };
 
   if (!songsData || songsData.length === 0) {
-    return <h3>No Songs</h3>;
+    return <h3>{alert}</h3>;
   }
 
   return (
