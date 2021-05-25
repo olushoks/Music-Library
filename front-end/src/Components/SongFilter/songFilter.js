@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./songFilter.css";
 
-const Filter = ({ selectOptions, filterTable }) => {
+const Filter = ({ selectOptions, filterTable, clearFilter }) => {
   const [filterCriteria, setFilterCriteria] = useState("");
   const [filterText, setFilterText] = useState("");
 
@@ -10,6 +10,13 @@ const Filter = ({ selectOptions, filterTable }) => {
   const handleFilter = (e) => {
     e.preventDefault();
     filterTable(filterCriteria, filterText);
+  };
+
+  const handleClearFilter = (e) => {
+    e.preventDefault();
+    setFilterCriteria("");
+    setFilterText("");
+    clearFilter();
   };
 
   return (
@@ -50,7 +57,7 @@ const Filter = ({ selectOptions, filterTable }) => {
         <button className="button" onClick={handleFilter}>
           Filter
         </button>
-        <button className="button" onClick={() => console.log(" Clear Filter")}>
+        <button className="button" onClick={handleClearFilter}>
           Clear Filter
         </button>
       </form>

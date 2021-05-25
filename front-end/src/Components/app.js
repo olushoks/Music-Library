@@ -31,7 +31,7 @@ function App() {
 
     let clearInfo = setTimeout(() => {
       setAlert("");
-    }, 30000);
+    }, 5000);
 
     return () => clearTimeout(clearInfo);
   };
@@ -86,11 +86,19 @@ function App() {
     }
   };
 
+  const clearFilter = () => {
+    setCurrentlyDisplayed(songsData);
+  };
+
   return (
     <div>
       <LandingPage />
       {/* <MoreAction /> */}
-      <FilterSongs selectOptions={songsData[0]} filterTable={filterTable} />
+      <FilterSongs
+        selectOptions={songsData[0]}
+        filterTable={filterTable}
+        clearFilter={clearFilter}
+      />
       <DisplaySongs
         songsData={currentlyDisplayed}
         deleteSong={deleteSong}
