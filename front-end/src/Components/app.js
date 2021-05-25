@@ -9,7 +9,6 @@ function App() {
   const [songsData, setSongsData] = useState([]);
   const [currentlyDisplayed, setCurrentlyDisplayed] = useState([]);
   const [alert, setAlert] = useState("");
-  // const [filteredTable, setFilteredTable] = useState([]);
 
   // FETCH SONG FROM API
   const fetch = async () => {
@@ -27,31 +26,29 @@ function App() {
     fetch();
   }, []);
 
-  // CHECK IF SONGSDATA IS EMPTY AND DISPLAY INFO TO USER
-  useEffect(() => {
-    if (songsData.length === 0) {
-      setAlert("No Songs in the Library at this time");
-    }
+  const handleAlert = (msg) => {
+    setAlert(msg);
 
     let clearInfo = setTimeout(() => {
       setAlert("");
-    }, 3000);
+    }, 30000);
 
     return () => clearTimeout(clearInfo);
-  }, [songsData]);
+  };
 
   // CHECK IF FILTER RETURNS NO RESULT AND DISPLAY INFO TO USER
   useEffect(() => {
     if (currentlyDisplayed.length === 0) {
-      setAlert("No Matching result. Please refine your search");
+      handleAlert("No Matching result. Please refine your search");
     }
-
-    let clearInfo = setTimeout(() => {
-      setAlert("");
-    }, 3000);
-
-    return () => clearTimeout(clearInfo);
   }, [currentlyDisplayed]);
+
+  // CHECK IF SONGSDATA IS EMPTY AND DISPLAY INFO TO USER
+  useEffect(() => {
+    if (songsData.length === 0) {
+      handleAlert("No Songs in the Library at this time.");
+    }
+  }, [songsData]);
 
   // DELETE SONG
   const deleteSong = (id) => {
@@ -69,7 +66,7 @@ function App() {
 
   // // Filter Button Click
   const filterTable = (filterCriteria, filterText) => {
-    // e.preventDefault();
+    filterText = filterText.toLowerCase();
 
     filterCriteria =
       filterCriteria === "Release Date" ? "releaseDate" : filterCriteria;
@@ -83,7 +80,7 @@ function App() {
 
     if (filterCriteria && filterText) {
       const updatedSongsTable = songsData.filter((song) =>
-        song[filterCriteria].includes(filterText)
+        song[filterCriteria].toLowerCase().includes(filterText)
       );
       setCurrentlyDisplayed(updatedSongsTable);
     }
