@@ -59,7 +59,7 @@ function App() {
     const newSongsTable = songsData.filter((song) => song.id !== id);
     setSongsData(newSongsTable);
 
-    // //REMOVE FROM DB
+    //REMOVE FROM DB
     axios
       .delete(`http://localhost:5000/api/songs/delete/${id}`)
       .then(({ data }) => {
@@ -82,12 +82,10 @@ function App() {
     }
 
     if (filterCriteria && filterText) {
-      setCurrentlyDisplayed((currentSongsTable) => {
-        const updatedSongsTable = currentSongsTable.filter((song) =>
-          song[filterCriteria].includes(filterText)
-        );
-        return updatedSongsTable;
-      });
+      const updatedSongsTable = songsData.filter((song) =>
+        song[filterCriteria].includes(filterText)
+      );
+      setCurrentlyDisplayed(updatedSongsTable);
     }
   };
 
