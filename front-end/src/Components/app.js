@@ -65,10 +65,17 @@ function App() {
   };
 
   // DISPLAY FORM TO ADD SONG
-  const addSong = () => {
+  const addSong = (song) => {
     setAction("Add");
     setShowAddEditForm(true);
-    setSong({});
+    setSong({
+      id: songsData.length + 1,
+      title: "",
+      album: "",
+      artist: "",
+      genre: "",
+      releaseDate: "",
+    });
   };
 
   // SUBMIT FORM
@@ -86,9 +93,23 @@ function App() {
           });
         });
 
-      setTimeout(() => {
-        setShowAddEditForm(false);
-      }, 4000);
+      // setTimeout(() => {
+      //   setShowAddEditForm(false);
+      // }, 4000);
+    }
+
+    if (action === "Add") {
+      await axios
+        .post(`http://localhost:5000/api/songs/add`, song)
+        .then(({ data }) => {
+          setSongsData(data);
+
+          setCurrentlyDisplayed([song, ...currentlyDisplayed]);
+        });
+
+      // setTimeout(() => {
+      //   setShowAddEditForm(false);
+      // }, 4000);
     }
   };
 

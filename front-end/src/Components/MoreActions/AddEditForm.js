@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import handleAlert from "../../hadleAlert";
 import "./moreActionForms.css";
 
-const AddEditForm = ({ action, songToEdit, submitForm, closeForm }) => {
+const AddEditForm = ({ action, song, submitForm, closeForm }) => {
   const [songInfo, setSongInfo] = useState({
-    ...songToEdit,
+    ...song,
   });
   const [alert, setAlert] = useState("");
 

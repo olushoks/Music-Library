@@ -238,5 +238,13 @@
     "artist": "OluShoks",
     "genre": "Universal",
     "releaseDate": "08/09/2029"
+  },
+  {
+    "id": 31,
+    "title": "Holiday",
+    "album": "Life in Him",
+    "artist": "OluShoks",
+    "genre": "Universal",
+    "releaseDate": "05/23/2021"
   }
 ]

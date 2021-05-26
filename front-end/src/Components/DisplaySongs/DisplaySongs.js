@@ -6,7 +6,14 @@ import axios from "axios";
 
 const DisplaySongs = ({ songsData, deleteSong, editSong, addSong, alert }) => {
   if (!songsData || songsData.length === 0) {
-    return <h3>{alert}</h3>;
+    return (
+      <div>
+        <h3>{alert}</h3>
+        <button className="button" onClick={addSong}>
+          <i className="fas fa-plus"></i>NEW SONG
+        </button>
+      </div>
+    );
   }
 
   return (
