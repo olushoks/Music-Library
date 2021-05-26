@@ -4,19 +4,24 @@ import "./moreActionForms.css";
 const AddEditForm = ({
   response,
   // handleChange,
-  handleSubmit,
+  // handleSubmit,
   action,
-  closeForm,
   songToEdit,
+  submitForm,
+  closeForm,
 }) => {
   const [songInfo, setSongInfo] = useState({
     ...songToEdit,
   });
-  // let { title, album, artist, genre, releaseDate } = songToEdit;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSongInfo({ ...songInfo, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitForm(songInfo);
   };
 
   return (

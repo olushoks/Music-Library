@@ -66,15 +66,31 @@ function App() {
       });
   };
 
+  // DISPLAY EDIT FORM
   const editSong = (song) => {
     setAction("Edit");
     setSongToEdit(song);
   };
 
+  // SUBMIT FORM
+  const submitForm = (song) => {
+    if (action === "Edit") {
+      axios
+        .put(`http://localhost:5000/api/songs/edit/${song.id}`, song)
+        .then((res) => {
+          const responseMessage = `Song has been succesfully edited`;
+        })
+        .catch(() => {
+          const responseMessage = `One or  more invalid input. Try Again!`;
+        });
+    }
+  };
+
+  // CLOSE ADD/EDIT FORM
   const closeForm = () => {
     setAction(false);
   };
-  // // Filter Button Click
+  // // FILTER CURRENTLY DISPLAYED TABLE
   const filterTable = (filterCriteria, filterText) => {
     filterText = filterText.toLowerCase();
 
@@ -96,6 +112,7 @@ function App() {
     }
   };
 
+  // CLEAR ALL FILTER
   const clearFilter = () => {
     setCurrentlyDisplayed(songsData);
   };
@@ -108,6 +125,7 @@ function App() {
           action={action}
           closeForm={closeForm}
           songToEdit={songToEdit}
+          submitForm={submitForm}
         />
       )}
       <FilterSongs
