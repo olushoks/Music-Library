@@ -68,11 +68,14 @@ function App() {
     if (action === "Edit") {
       axios
         .put(`http://localhost:5000/api/songs/edit/${song.id}`, song)
-        .then((res) => {
-          const responseMessage = `Song has been succesfully edited`;
-        })
-        .catch(() => {
-          const responseMessage = `One or  more invalid input. Try Again!`;
+        .then(({ data }) => {
+          setSongsData(data);
+
+          setCurrentlyDisplayed((current) => {
+            const updated = current.filter((el) => el.id !== song.id);
+
+            return [...updated, song];
+          });
         });
     }
   };
