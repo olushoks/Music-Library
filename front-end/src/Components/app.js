@@ -9,7 +9,7 @@ import handleAlert from "../hadleAlert";
 function App() {
   const [songsData, setSongsData] = useState([]);
   const [currentlyDisplayed, setCurrentlyDisplayed] = useState([]);
-  const [songToEdit, setSongToEdit] = useState(null);
+  const [song, setSong] = useState(null);
   const [action, setAction] = useState(false);
   const [showAddEditForm, setShowAddEditForm] = useState(false);
   const [alert, setAlert] = useState("");
@@ -47,8 +47,8 @@ function App() {
   // DELETE SONG
   const deleteSong = (id) => {
     //REMOVE FROM UII
-    const newSongsTable = songsData.filter((song) => song.id !== id);
-    setSongsData(newSongsTable);
+    const newSongsTable = currentlyDisplayed.filter((song) => song.id !== id);
+    setCurrentlyDisplayed(newSongsTable);
 
     //REMOVE FROM DB
     axios
@@ -58,11 +58,17 @@ function App() {
       });
   };
 
-  // DISPLAY EDIT FORM
-  const editSong = (song) => {
+  const editSong = (songToEdit) => {
     setAction("Edit");
     setShowAddEditForm(true);
-    setSongToEdit(song);
+    setSong(songToEdit);
+  };
+
+  // DISPLAY FORM TO ADD SONG
+  const addSong = () => {
+    setAction("Add");
+    setShowAddEditForm(true);
+    setSong({});
   };
 
   // SUBMIT FORM
@@ -124,7 +130,7 @@ function App() {
         <AddEditForm
           action={action}
           closeForm={closeForm}
-          songToEdit={songToEdit}
+          song={song}
           submitForm={submitForm}
         />
       )}
@@ -137,6 +143,7 @@ function App() {
         songsData={currentlyDisplayed}
         deleteSong={deleteSong}
         editSong={editSong}
+        addSong={addSong}
         alert={alert}
       />
     </div>

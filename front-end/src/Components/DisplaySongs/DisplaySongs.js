@@ -4,7 +4,7 @@ import MoreAction from "../MoreActions/moreActions";
 import "./DisplaySongs.css";
 import axios from "axios";
 
-const DisplaySongs = ({ songsData, deleteSong, editSong, alert }) => {
+const DisplaySongs = ({ songsData, deleteSong, editSong, addSong, alert }) => {
   if (!songsData || songsData.length === 0) {
     return <h3>{alert}</h3>;
   }
@@ -23,7 +23,11 @@ const DisplaySongs = ({ songsData, deleteSong, editSong, alert }) => {
                 </th>
               );
             })}
-            <th>MODIFY</th>
+            <th>
+              <button className="button" onClick={addSong}>
+                <i className="fas fa-plus"></i>NEW SONG
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -38,7 +42,6 @@ const DisplaySongs = ({ songsData, deleteSong, editSong, alert }) => {
                 <td>{song.releaseDate}</td>
                 <td>
                   <button onClick={() => editSong(song)}>edit</button>
-
                   <button onClick={() => deleteSong(song.id)}>delete</button>
                 </td>
               </tr>
