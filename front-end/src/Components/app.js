@@ -9,9 +9,10 @@ import handleAlert from "../hadleAlert";
 function App() {
   const [songsData, setSongsData] = useState([]);
   const [currentlyDisplayed, setCurrentlyDisplayed] = useState([]);
-  const [action, setAction] = useState(false);
-  const [alert, setAlert] = useState("");
   const [songToEdit, setSongToEdit] = useState(null);
+  const [action, setAction] = useState(false);
+  const [showAddEditForm, setShowAddEditForm] = useState(false);
+  const [alert, setAlert] = useState("");
 
   // FETCH SONG FROM API
   const fetch = async () => {
@@ -60,13 +61,14 @@ function App() {
   // DISPLAY EDIT FORM
   const editSong = (song) => {
     setAction("Edit");
+    setShowAddEditForm(true);
     setSongToEdit(song);
   };
 
   // SUBMIT FORM
-  const submitForm = (song) => {
+  const submitForm = async (song) => {
     if (action === "Edit") {
-      axios
+      await axios
         .put(`http://localhost:5000/api/songs/edit/${song.id}`, song)
         .then(({ data }) => {
           setSongsData(data);
@@ -74,15 +76,19 @@ function App() {
           setCurrentlyDisplayed((current) => {
             const updated = current.filter((el) => el.id !== song.id);
 
-            return [...updated, song];
+            return [song, ...updated];
           });
         });
+
+      setTimeout(() => {
+        setShowAddEditForm(false);
+      }, 4000);
     }
   };
 
   // CLOSE ADD/EDIT FORM
   const closeForm = () => {
-    setAction(false);
+    setShowAddEditForm(false);
   };
   // // FILTER CURRENTLY DISPLAYED TABLE
   const filterTable = (filterCriteria, filterText) => {
@@ -114,7 +120,7 @@ function App() {
   return (
     <div>
       <LandingPage />
-      {action && (
+      {showAddEditForm && (
         <AddEditForm
           action={action}
           closeForm={closeForm}
