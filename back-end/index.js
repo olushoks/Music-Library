@@ -32,16 +32,18 @@ app.get("/api/songs/get/:id", (req, res) => {
 // ADD NEW SONGS TO DATABASE
 app.post("/api/songs/add", [validateNewSong], (req, res) => {
   const songToAdd = req.body;
-  const newSong = repoContext.songs.createSong(songToAdd);
-  res.send(newSong);
+  repoContext.songs.createSong(songToAdd);
+  const songs = repoContext.songs.findAllSongs();
+  res.send(songs);
 });
 
 // UPDATE SONGS IN LIBRARY
 app.put("/api/songs/edit/:id", [validateNewSong], (req, res) => {
   const id = req.params.id;
   const songDetailsToUpdate = req.body;
-  const updatedSong = repoContext.songs.updateSong(id, songDetailsToUpdate);
-  res.send(updatedSong);
+  repoContext.songs.updateSong(id, songDetailsToUpdate);
+  const songs = repoContext.songs.findAllSongs();
+  res.send(songs);
 });
 
 // DELETE SONG(S) IN DATABASE
