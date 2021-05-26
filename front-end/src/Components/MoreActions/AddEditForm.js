@@ -3,8 +3,6 @@ import "./moreActionForms.css";
 
 const AddEditForm = ({
   response,
-  // handleChange,
-  // handleSubmit,
   action,
   songToEdit,
   submitForm,
@@ -20,8 +18,14 @@ const AddEditForm = ({
   };
 
   const handleSubmit = (e) => {
+    const { title, album, artist, genre, releaseDate } = songInfo;
     e.preventDefault();
-    submitForm(songInfo);
+    if (!title || !album || !artist || !genre || !releaseDate) {
+      console.log(`error`);
+    } else {
+      submitForm(songInfo);
+      setSongInfo(null);
+    }
   };
 
   return (

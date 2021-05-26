@@ -4,6 +4,7 @@ import LandingPage from "./LandingPage/landingPage";
 import DisplaySongs from "./DisplaySongs/DisplaySongs";
 import AddEditForm from "./MoreActions/AddEditForm";
 import FilterSongs from "./SongFilter/songFilter";
+import handleAlert from "../hadleAlert";
 
 function App() {
   const [songsData, setSongsData] = useState([]);
@@ -28,27 +29,27 @@ function App() {
     fetch();
   }, []);
 
-  const handleAlert = (msg) => {
-    setAlert(msg);
+  // const handleAlert = (msg) => {
+  //   setAlert(msg);
 
-    let clearInfo = setTimeout(() => {
-      setAlert("");
-    }, 5000);
+  //   let clearInfo = setTimeout(() => {
+  //     setAlert("");
+  //   }, 5000);
 
-    return () => clearTimeout(clearInfo);
-  };
+  //   return () => clearTimeout(clearInfo);
+  // };
 
   // CHECK IF FILTER RETURNS NO RESULT AND DISPLAY INFO TO USER
   useEffect(() => {
     if (currentlyDisplayed.length === 0) {
-      handleAlert("No Matching result. Please refine your search");
+      handleAlert(setAlert, "No Matching result. Please refine your search");
     }
   }, [currentlyDisplayed]);
 
   // CHECK IF SONGSDATA IS EMPTY AND DISPLAY INFO TO USER
   useEffect(() => {
     if (songsData.length === 0) {
-      handleAlert("No Songs in the Library at this time.");
+      handleAlert(setAlert, "No Songs in the Library at this time.");
     }
   }, [songsData]);
 
