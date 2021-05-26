@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { AddSong, EditSong } from "./moreActionForms";
 import "./moreActions.css";
 
 const MoreAction = ({ action }) => {
@@ -58,10 +57,6 @@ const MoreAction = ({ action }) => {
   // }
 
   // CLEAR FORM
-
-  if (action === "edit") {
-    return <AddSong />;
-  }
 
   return <p>What!!</p>;
 };

@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LandingPage from "./LandingPage/landingPage";
 import DisplaySongs from "./DisplaySongs/DisplaySongs";
-import MoreAction from "./MoreActions/moreActions";
+import AddEditForm from "./MoreActions/AddEditForm";
 import FilterSongs from "./SongFilter/songFilter";
 
 function App() {
   const [songsData, setSongsData] = useState([]);
   const [currentlyDisplayed, setCurrentlyDisplayed] = useState([]);
+  const [action, setAction] = useState(false);
   const [alert, setAlert] = useState("");
+  const [songToEdit, setSongToEdit] = useState(null);
 
   // FETCH SONG FROM API
   const fetch = async () => {
@@ -64,6 +66,14 @@ function App() {
       });
   };
 
+  const editSong = (song) => {
+    setAction("Edit");
+    setSongToEdit(song);
+  };
+
+  const closeForm = () => {
+    setAction(false);
+  };
   // // Filter Button Click
   const filterTable = (filterCriteria, filterText) => {
     filterText = filterText.toLowerCase();
@@ -93,7 +103,13 @@ function App() {
   return (
     <div>
       <LandingPage />
-      {/* <MoreAction /> */}
+      {action && (
+        <AddEditForm
+          action={action}
+          closeForm={closeForm}
+          songToEdit={songToEdit}
+        />
+      )}
       <FilterSongs
         selectOptions={songsData[0]}
         filterTable={filterTable}
@@ -102,6 +118,7 @@ function App() {
       <DisplaySongs
         songsData={currentlyDisplayed}
         deleteSong={deleteSong}
+        editSong={editSong}
         alert={alert}
       />
     </div>
