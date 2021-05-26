@@ -29,16 +29,6 @@ function App() {
     fetch();
   }, []);
 
-  // const handleAlert = (msg) => {
-  //   setAlert(msg);
-
-  //   let clearInfo = setTimeout(() => {
-  //     setAlert("");
-  //   }, 5000);
-
-  //   return () => clearTimeout(clearInfo);
-  // };
-
   // CHECK IF FILTER RETURNS NO RESULT AND DISPLAY INFO TO USER
   useEffect(() => {
     if (currentlyDisplayed.length === 0) {

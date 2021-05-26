@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import handleAlert from "../../hadleAlert";
 import "./moreActionForms.css";
 
 const AddEditForm = ({
@@ -11,6 +12,7 @@ const AddEditForm = ({
   const [songInfo, setSongInfo] = useState({
     ...songToEdit,
   });
+  const [alert, setAlert] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,16 +23,25 @@ const AddEditForm = ({
     const { title, album, artist, genre, releaseDate } = songInfo;
     e.preventDefault();
     if (!title || !album || !artist || !genre || !releaseDate) {
-      console.log(`error`);
+      handleAlert(setAlert, "Empty values not allowed");
     } else {
       submitForm(songInfo);
-      setSongInfo(null);
+      handleAlert(
+        setAlert,
+        `Song succesfully ${action === "Edit" ? "edited" : "added"}`
+      );
+      setSongInfo({
+        title: "",
+        album: "",
+        artist: "",
+        genre: "",
+        releaseDate: "",
+      });
     }
   };
 
   return (
     <form className="" onSubmit={handleSubmit}>
-      <p className="">{response}</p>
       <h4>
         {action} Song
         <i
@@ -38,6 +49,7 @@ const AddEditForm = ({
           onClick={closeForm}
         ></i>
       </h4>
+      <p className="">{alert}</p>
 
       <label className="more-label">
         Song Title
