@@ -14,7 +14,7 @@
   font-weight: 900;
   text-decoration: underline;
   margin-right: 0.5rem;
-  font-style: italic;
+  font-style: oblique(0, 8);
 }
 
 .select {
@@ -49,5 +49,5 @@
   font-size: 0.9rem;
 }
 .button:hover {
-  font-size: 1rem;
+  font-size: 0.95rem;
 }

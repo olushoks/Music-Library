@@ -10,7 +10,7 @@ function App() {
   const [songsData, setSongsData] = useState([]);
   const [currentlyDisplayed, setCurrentlyDisplayed] = useState([]);
   const [song, setSong] = useState(null);
-  const [action, setAction] = useState(false);
+  const [action, setAction] = useState("");
   const [showAddEditForm, setShowAddEditForm] = useState(false);
   const [alert, setAlert] = useState("");
 
@@ -44,6 +44,18 @@ function App() {
     }
   }, [songsData]);
 
+  useEffect(() => {
+    if (action && showAddEditForm) {
+      let autoCloseForm = setTimeout(() => {
+        setShowAddEditForm(false);
+        setAction("");
+        setSong(null);
+      }, 4000);
+
+      return () => clearTimeout(autoCloseForm);
+    }
+  }, [currentlyDisplayed]);
+
   // DELETE SONG
   const deleteSong = (id) => {
     //REMOVE FROM UII
@@ -65,7 +77,7 @@ function App() {
   };
 
   // DISPLAY FORM TO ADD SONG
-  const addSong = (song) => {
+  const addSong = () => {
     setAction("Add");
     setShowAddEditForm(true);
     setSong({
@@ -88,14 +100,10 @@ function App() {
 
           setCurrentlyDisplayed((current) => {
             const updated = current.filter((el) => el.id !== song.id);
-
+            setSong(song);
             return [song, ...updated];
           });
         });
-
-      // setTimeout(() => {
-      //   setShowAddEditForm(false);
-      // }, 4000);
     }
 
     if (action === "Add") {
@@ -103,20 +111,17 @@ function App() {
         .post(`http://localhost:5000/api/songs/add`, song)
         .then(({ data }) => {
           setSongsData(data);
-
           setCurrentlyDisplayed([song, ...currentlyDisplayed]);
         });
-
-      // setTimeout(() => {
-      //   setShowAddEditForm(false);
-      // }, 4000);
     }
   };
 
   // CLOSE ADD/EDIT FORM
   const closeForm = () => {
     setShowAddEditForm(false);
+    setAction("");
   };
+
   // // FILTER CURRENTLY DISPLAYED TABLE
   const filterTable = (filterCriteria, filterText) => {
     filterText = filterText.toLowerCase();

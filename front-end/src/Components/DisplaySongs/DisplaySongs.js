@@ -1,8 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Filter from "../SongFilter/songFilter";
-import MoreAction from "../MoreActions/moreActions";
 import "./DisplaySongs.css";
-import axios from "axios";
 
 const DisplaySongs = ({ songsData, deleteSong, editSong, addSong, alert }) => {
   if (!songsData || songsData.length === 0) {
