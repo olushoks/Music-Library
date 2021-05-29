@@ -60,7 +60,6 @@ const Filter = ({ selectOptions, filterTable, clearFilter }) => {
         <button className="filter-button" onClick={handleClearFilter}>
           Clear Filter
         </button>
-        {/* <span className="button">Add Song</span> */}
       </form>
     </div>
   );

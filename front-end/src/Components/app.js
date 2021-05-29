@@ -127,13 +127,6 @@ function App() {
     filterCriteria =
       filterCriteria === "Release Date" ? "releaseDate" : filterCriteria;
 
-    if (filterCriteria === undefined) {
-      console.log("Choose an option to filter by!");
-    }
-    if (filterText === undefined) {
-      console.log("Enter some text!");
-    }
-
     if (filterCriteria && filterText) {
       const updatedSongsTable = songsData.filter((song) =>
         song[filterCriteria].toLowerCase().includes(filterText)
