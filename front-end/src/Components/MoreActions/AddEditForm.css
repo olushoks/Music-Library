@@ -21,6 +21,7 @@
   background-color: #00154f;
   opacity: 80%;
   border-radius: 0.5rem;
+  transform: translate(5%, 5%);
 }
 
 .input-section {
@@ -42,7 +43,6 @@
   cursor: text;
   display: inline-block;
   width: 10rem;
-  position: relative;
 }
 
 .more-input:hover {

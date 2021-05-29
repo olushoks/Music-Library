@@ -52,7 +52,6 @@ td {
   border: ridge transparent 0.2rem;
   color: #00154f;
   background-color: #ffffff;
-  /* color: #f4af1b; */
   border-radius: 0.5rem 1rem;
   text-align: center;
   padding: 0.05rem 0.3rem;
@@ -67,6 +66,19 @@ td {
 .add-btn {
   width: auto;
   margin: 0.2rem 0.5rem;
+}
+
+.btn-center {
+  border-radius: 0.5rem 1rem;
+  background-color: #00154f;
+  color: #f4af1b;
+  position: fixed;
+  left: 50%;
+}
+
+.div-center {
+  text-align: center;
+  color: #00154f;
 }
 
 .add-icon {

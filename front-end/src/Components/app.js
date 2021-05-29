@@ -8,7 +8,7 @@ import handleAlert from "../hadleAlert";
 
 function App() {
   const [songsData, setSongsData] = useState([]);
-  const [currentlyDisplayed, setCurrentlyDisplayed] = useState([]);
+  const [currentlyDisplayed, setCurrentlyDisplayed] = useState(null);
   const [song, setSong] = useState(null);
   const [action, setAction] = useState("");
   const [showAddEditForm, setShowAddEditForm] = useState(false);
@@ -16,13 +16,12 @@ function App() {
 
   // FETCH SONG FROM API
   const fetch = async () => {
-    await axios
-      // .get("http://www.devcodecampmusiclibrary.com/api/music")
-      .get("http://localhost:5000/api/songs/get")
-      .then(({ data }) => {
-        setSongsData(data);
-        setCurrentlyDisplayed(data);
-      });
+    await axios.get("http://localhost:5000/api/songs/get").then(({ data }) => {
+      setSongsData(data);
+      data.length === 0
+        ? setCurrentlyDisplayed(null)
+        : setCurrentlyDisplayed(data);
+    });
   };
 
   // CALL FETCH ON INITIAL RENDER
@@ -32,17 +31,10 @@ function App() {
 
   // CHECK IF FILTER RETURNS NO RESULT AND DISPLAY INFO TO USER
   useEffect(() => {
-    if (currentlyDisplayed.length === 0) {
-      handleAlert(setAlert, "No Matching result. Please refine your search");
+    if (!currentlyDisplayed) {
+      handleAlert(setAlert, "No Songs in the Library at this time");
     }
-  }, [currentlyDisplayed]);
-
-  // CHECK IF SONGSDATA IS EMPTY AND DISPLAY INFO TO USER
-  useEffect(() => {
-    if (songsData.length === 0) {
-      handleAlert(setAlert, "No Songs in the Library at this time.");
-    }
-  }, [songsData]);
+  }, []);
 
   useEffect(() => {
     if (action && showAddEditForm) {
@@ -111,7 +103,13 @@ function App() {
         .post(`http://localhost:5000/api/songs/add`, song)
         .then(({ data }) => {
           setSongsData(data);
-          setCurrentlyDisplayed([song, ...currentlyDisplayed]);
+          setCurrentlyDisplayed((currentTable) => {
+            if (!currentTable) {
+              return [song];
+            } else if (currentTable.length > 0) {
+              return [song, ...currentlyDisplayed];
+            }
+          });
         });
     }
   };
@@ -141,6 +139,9 @@ function App() {
         song[filterCriteria].toLowerCase().includes(filterText)
       );
       setCurrentlyDisplayed(updatedSongsTable);
+      if (updatedSongsTable.length === 0) {
+        handleAlert(setAlert, "No Matching result. Please refine your search");
+      }
     }
   };
 

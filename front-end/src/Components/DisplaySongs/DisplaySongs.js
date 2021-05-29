@@ -1,13 +1,21 @@
 import "./DisplaySongs.css";
 
 const DisplaySongs = ({ songsData, deleteSong, editSong, addSong, alert }) => {
-  if (!songsData || songsData.length === 0) {
+  if (!songsData) {
     return (
       <div>
-        <h3>{alert}</h3>
-        <button className="button" onClick={addSong}>
-          <i className="fas fa-plus"></i>NEW SONG
+        <h3 className="div-center">{alert}</h3>
+        <button className="button add-btn btn-center" onClick={addSong}>
+          <i className="fas fa-plus add-icon"></i>NEW SONG
         </button>
+      </div>
+    );
+  }
+
+  if (songsData.length === 0) {
+    return (
+      <div>
+        <h3 className="div-center">{alert}</h3>
       </div>
     );
   }
@@ -33,9 +41,6 @@ const DisplaySongs = ({ songsData, deleteSong, editSong, addSong, alert }) => {
               <button className="button add-btn" onClick={addSong}>
                 <i className="fas fa-plus add-icon"></i>NEW SONG
               </button>
-              {/* <>
-                <i className="fas fa-plus" onClick={addSong}></i>NEW SONG
-              </> */}
             </th>
           </tr>
         </thead>
