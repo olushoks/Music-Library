@@ -54,10 +54,10 @@ const Filter = ({ selectOptions, filterTable, clearFilter }) => {
           placeholder="enter text to filter by"
           onChange={(e) => setFilterText(e.target.value)}
         ></input>
-        <button className="button" onClick={handleFilter}>
+        <button className="filter-button" onClick={handleFilter}>
           Filter
         </button>
-        <button className="button" onClick={handleClearFilter}>
+        <button className="filter-button" onClick={handleClearFilter}>
           Clear Filter
         </button>
         {/* <span className="button">Add Song</span> */}

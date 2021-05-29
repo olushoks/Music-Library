@@ -37,7 +37,7 @@
 .select:hover {
   border-color: #00154f;
 }
-.button {
+.filter-button {
   border: ridge transparent 0.2rem;
   background-color: #00154f;
   color: #f4af1b;
@@ -48,6 +48,6 @@
   width: 8rem;
   font-size: 0.9rem;
 }
-.button:hover {
+.filter-button:hover {
   font-size: 0.95rem;
 }

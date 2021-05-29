@@ -14,7 +14,10 @@ const DisplaySongs = ({ songsData, deleteSong, editSong, addSong, alert }) => {
 
   return (
     <>
-      <table className="table table-block table-hover">
+      <table
+        className="table table-block table-hover"
+        style={{ margin: "0 2rem !important" }}
+      >
         <thead className="table-header">
           <tr>
             {Object.keys(songsData[0]).map((el) => {
@@ -27,9 +30,12 @@ const DisplaySongs = ({ songsData, deleteSong, editSong, addSong, alert }) => {
               );
             })}
             <th>
-              <button className="button" onClick={addSong}>
-                <i className="fas fa-plus"></i>NEW SONG
+              <button className="button add-btn" onClick={addSong}>
+                <i className="fas fa-plus add-icon"></i>NEW SONG
               </button>
+              {/* <>
+                <i className="fas fa-plus" onClick={addSong}></i>NEW SONG
+              </> */}
             </th>
           </tr>
         </thead>
@@ -44,8 +50,15 @@ const DisplaySongs = ({ songsData, deleteSong, editSong, addSong, alert }) => {
                 <td>{song.genre}</td>
                 <td>{song.releaseDate}</td>
                 <td>
-                  <button onClick={() => editSong(song)}>edit</button>
-                  <button onClick={() => deleteSong(song.id)}>delete</button>
+                  <button className="button" onClick={() => editSong(song)}>
+                    edit
+                  </button>
+                  <button
+                    className="button"
+                    onClick={() => deleteSong(song.id)}
+                  >
+                    delete
+                  </button>
                 </td>
               </tr>
             );
